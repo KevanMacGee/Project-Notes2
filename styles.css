@@ -1,0 +1,71 @@
+/* Kanban Row Styles */
+.kanban-row {
+    min-height: 120px;
+    margin-bottom: 1rem;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Row Color Coding */
+.todo-row { 
+    background-color: #f8d7da; 
+}
+
+.inprogress-row { 
+    background-color: #fff3cd; 
+}
+
+.done-row { 
+    background-color: #d1e7dd; 
+}
+
+.holding-row { 
+    background-color: #cfe2ff; 
+}
+
+/* Task Card Styles */
+.kanban-card {
+    cursor: grab;
+    margin: 0 10px;
+    min-width: 200px;
+}
+
+.kanban-card:active {
+    cursor: grabbing;
+}
+
+/* Row Container Styles */
+.row-container {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.row-title {
+    min-width: 120px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+/* Drag and Drop Visual Feedback */
+.dragging {
+    opacity: 0.5;
+}
+
+.card-placeholder {
+    border: 2px dashed #999;
+    background-color: rgba(0,0,0,0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .row-title {
+        min-width: 80px;
+        font-size: 0.9rem;
+    }
+    
+    .kanban-card {
+        min-width: 150px;
+    }
+}
