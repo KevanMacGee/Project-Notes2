@@ -52,8 +52,10 @@ function createTaskCard(task) {
   card.innerHTML = `
       <div class="card-header d-flex justify-content-between align-items-center">
           <h5 class="card-title mb-0">${task.title}</h5>
-          <button type="button" class="btn-close delete-task" 
-                  aria-label="Delete task"></button>
+          <button type="button" class="btn btn-link delete-task p-0" 
+                  aria-label="Delete task">
+              <i class="bi bi-trash"></i>
+          </button>
       </div>
       <div class="card-body">
           <p class="card-text">${task.description}</p>

@@ -54,3 +54,12 @@
   .status-row.holding {
     background-color: #fce4ec; /* Light pink */
   }
+
+.delete-task {
+    color: #dc3545;
+    transition: color 0.2s ease;
+}
+
+.delete-task:hover {
+    color: #bb2d3b;
+}
