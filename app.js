@@ -50,23 +50,10 @@ function createTaskCard(task) {
   card.id = task.id;
 
   card.innerHTML = `
-      <div class="card-header d-flex justify-content-between align-items-center">
-          <h5 class="card-title mb-0">${task.title}</h5>
-          <button type="button" class="btn btn-link delete-task p-0" 
-                  aria-label="Delete task">
-              <i class="bi bi-trash"></i>
-          </button>
-      </div>
       <div class="card-body">
-          <p class="card-text">${task.description}</p>
+          <p class="card-text">${task.title} - ${task.description}</p>
       </div>
   `;
-
-  // Add event listener for delete button
-  card.querySelector('.delete-task').addEventListener('click', () => {
-      card.remove();
-      deleteTask(task.id);
-  });
 
   // Handle drag events
   card.addEventListener("dragstart", dragStart);

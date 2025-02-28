@@ -22,6 +22,7 @@
     width: calc(33.333% - 10px); /* Adjust width to show multiple cards per row */
     min-width: 200px;
     margin-bottom: 10px;
+    font-size: 14px;
   }
   
   .task-card .btn-close {
@@ -31,6 +32,14 @@
 
   .task-card .card-header {
     padding: 0.75rem 1rem;
+  }
+
+  .task-card .card-body {
+    padding: 0.75rem;
+  }
+
+  .task-card .card-text {
+    margin-bottom: 0;
   }
   
   /* Visual feedback when dragging over a container */
