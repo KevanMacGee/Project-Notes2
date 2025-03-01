@@ -6,6 +6,19 @@
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Add colored left border for each status row */
+  .status-row::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
   }
   
   /* Container for tasks in each row */
@@ -48,20 +61,20 @@
   }
   
   /* Color coding for each status row */
-  .status-row.todo {
-    background-color: #e7f3fe; /* Light blue */
+  .status-row.todo::before {
+    background-color: #0d6efd; /* Blue */
   }
   
-  .status-row.in-progress {
-    background-color: #fff8e1; /* Light yellow */
+  .status-row.in-progress::before {
+    background-color: #ffc107; /* Yellow */
   }
   
-  .status-row.done {
-    background-color: #e8f5e9; /* Light green */
+  .status-row.done::before {
+    background-color: #198754; /* Green */
   }
   
-  .status-row.holding {
-    background-color: #fce4ec; /* Light pink */
+  .status-row.holding::before {
+    background-color: #d63384; /* Pink */
   }
 
 .delete-task {
