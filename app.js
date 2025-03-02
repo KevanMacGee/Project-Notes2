@@ -50,8 +50,12 @@ function createTaskCard(task) {
   card.id = task.id;
 
   card.innerHTML = `
-      <div class="card-body">
+      <div class="card-body d-flex justify-content-between align-items-start">
           <p class="card-text">${task.content}</p>
+          <button type="button" class="btn-close delete-task" 
+                  aria-label="Delete task"
+                  onclick="deleteTask('${task.id}')">
+          </button>
       </div>
   `;
 

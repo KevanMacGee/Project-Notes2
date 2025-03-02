@@ -10,6 +10,7 @@
     background-color: white;
     position: relative;
     overflow: hidden;
+    width: 100%;
   }
   
   /* Add colored left border for each status row */
@@ -91,16 +92,14 @@
 /* Board row layout */
 .board-row {
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: column;
   margin-bottom: 20px;
 }
 
 /* Row title styling */
 .row-title {
-  width: 120px;
-  margin: 0;
-  text-align: right;
   font-size: 1.1rem;
   color: #6c757d;
+  margin-bottom: 0.5rem;
+  padding-left: 10px; /* Align with the row content */
 }
