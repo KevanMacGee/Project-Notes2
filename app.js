@@ -51,7 +51,7 @@ function createTaskCard(task) {
 
   card.innerHTML = `
       <div class="card-body">
-          <p class="card-text">${task.title} - ${task.description}</p>
+          <p class="card-text">${task.content}</p>
       </div>
   `;
 
@@ -65,29 +65,27 @@ function createTaskCard(task) {
 /* Add a new task from form data */
 function addTask(event) {
   event.preventDefault();
-  const titleInput = document.getElementById("taskTitle");
-  const descInput = document.getElementById("taskDescription");
-  const title = titleInput.value.trim();
-  const description = descInput.value.trim();
-  if (!title || !description) return;
+  const contentInput = document.getElementById("taskContent");
+  const content = contentInput.value.trim();
+  if (!content) return;
 
-  // Create a new task with a unique id and default status "todo"
+  // Create a new task
   const task = {
     id: "task-" + Date.now(),
-    title: title,
-    description: description,
+    content: content,
     status: "todo"
   };
   tasks.push(task);
   saveTasks();
 
-  // Create and append the task card to the "To Do" row
+  // Create and append the task card
   const taskCard = createTaskCard(task);
   document.getElementById("todo").appendChild(taskCard);
 
-  // Clear form inputs for new task entries
-  titleInput.value = "";
-  descInput.value = "";
+  // Reset form and close modal
+  event.target.reset();
+  const modal = bootstrap.Modal.getInstance(document.getElementById('taskModal'));
+  modal.hide();
 }
 
 /* Delete a task by its id */

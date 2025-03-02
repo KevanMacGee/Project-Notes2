@@ -2,7 +2,8 @@
 
 /* Base styles for each status row */
 .status-row {
-    margin-bottom: 20px;
+    flex: 1;
+    margin-bottom: 0; /* Remove existing margin since it's handled by board-row */
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -28,6 +29,7 @@
     flex-wrap: wrap;
     gap: 10px;
     padding: 10px;
+    width: 100%;
   }
   
   /* Style for individual task cards using Bootstrap card */
@@ -84,4 +86,21 @@
 
 .delete-task:hover {
     color: #bb2d3b;
+}
+
+/* Board row layout */
+.board-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 20px;
+}
+
+/* Row title styling */
+.row-title {
+  width: 120px;
+  margin: 0;
+  text-align: right;
+  font-size: 1.1rem;
+  color: #6c757d;
 }
