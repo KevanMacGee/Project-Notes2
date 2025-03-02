@@ -3,82 +3,91 @@
 /* Base styles for each status row */
 .status-row {
     flex: 1;
-    margin-bottom: 0; /* Remove existing margin since it's handled by board-row */
+    margin-bottom: 0;
     padding: 10px;
-    border: 1px solid #ddd;
     border-radius: 5px;
-    background-color: white;
+    background-color: #f8f9fa; /* Very light grey from Bootstrap's color palette */
     position: relative;
     overflow: hidden;
     width: 100%;
-  }
+}
   
-  /* Add colored left border for each status row */
-  .status-row::before {
+/* Add colored left border for each status row */
+.status-row::before {
     content: "";
     position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
     width: 5px;
-  }
+}
   
-  /* Container for tasks in each row */
-  .task-container {
-    min-height: 100px;
+/* Container for tasks in each row */
+.task-container {
+    min-height: 120px; /* Increased minimum height */
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row; /* Change to row to allow cards side by side */
+    flex-wrap: wrap; /* Allow cards to wrap */
     gap: 10px;
     padding: 10px;
     width: 100%;
-  }
+}
   
-  /* Style for individual task cards using Bootstrap card */
-  .task-card {
-    width: calc(33.333% - 10px); /* Adjust width to show multiple cards per row */
-    min-width: 200px;
-    margin-bottom: 10px;
+/* Style for individual task cards */
+.task-card {
+    width: 250px; /* Fixed width */
+    max-width: 300px; /* Maximum width */
+    height: 100%; /* Fill container height */
     font-size: 14px;
-  }
+    margin-bottom: 10px;
+    display: flex;
+}
   
-  .task-card .btn-close {
+.task-card .btn-close {
     padding: 0.5rem;
     margin: -0.5rem -0.5rem -0.5rem auto;
-  }
+}
 
-  .task-card .card-header {
+.task-card .card-header {
     padding: 0.75rem 1rem;
-  }
+}
 
-  .task-card .card-body {
+/* Make card body fill available space */
+.task-card .card-body {
     padding: 0.75rem;
-  }
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute space evenly */
+}
 
-  .task-card .card-text {
+/* Ensure card text fills available space */
+.task-card .card-text {
     margin-bottom: 0;
-  }
+    flex: 1;
+}
   
-  /* Visual feedback when dragging over a container */
-  .drag-over {
+/* Visual feedback when dragging over a container */
+.drag-over {
     background-color: #f0f0f0;
-  }
+}
   
-  /* Color coding for each status row */
-  .status-row.todo::before {
+/* Color coding for each status row */
+.status-row.todo::before {
     background-color: #0d6efd; /* Blue */
-  }
+}
   
-  .status-row.in-progress::before {
+.status-row.in-progress::before {
     background-color: #ffc107; /* Yellow */
-  }
+}
   
-  .status-row.done::before {
+.status-row.done::before {
     background-color: #198754; /* Green */
-  }
+}
   
-  .status-row.holding::before {
+.status-row.holding::before {
     background-color: #d63384; /* Pink */
-  }
+}
 
 .delete-task {
     color: #dc3545;
