@@ -24,23 +24,25 @@
   
 /* Container for tasks in each row */
 .task-container {
-    min-height: 120px; /* Increased minimum height */
+    min-height: 120px;
     display: flex;
-    flex-direction: row; /* Change to row to allow cards side by side */
-    flex-wrap: wrap; /* Allow cards to wrap */
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 10px;
-    padding: 10px;
+    padding: 5px; /* Reduced padding from 10px to 5px */
     width: 100%;
+    align-items: stretch;
 }
   
 /* Style for individual task cards */
 .task-card {
-    width: 250px; /* Fixed width */
-    max-width: 300px; /* Maximum width */
-    height: 100%; /* Fill container height */
+    width: 250px;
+    max-width: 300px;
+    height: 110px; /* Exact height, just 10px less than container */
     font-size: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 0;
     display: flex;
+    flex: 0 0 auto;
 }
   
 .task-card .btn-close {
@@ -55,10 +57,9 @@
 /* Make card body fill available space */
 .task-card .card-body {
     padding: 0.75rem;
-    flex: 1;
+    flex: 1 1 auto; /* Allow growing and shrinking */
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Distribute space evenly */
 }
 
 /* Ensure card text fills available space */
