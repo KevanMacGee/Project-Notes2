@@ -50,8 +50,10 @@ function createTaskCard(task) {
   card.id = task.id;
 
   card.innerHTML = `
-      <div class="card-body d-flex justify-content-between align-items-start">
-          <p class="card-text">${task.content}</p>
+      <div class="card-body d-flex justify-content-between">
+          <textarea class="card-text task-content" 
+                    data-task-id="${task.id}"
+                    onfocus="this.select()">${task.content}</textarea>
           <button type="button" class="btn-close delete-task" 
                   aria-label="Delete task"
                   onclick="deleteTask('${task.id}')">
@@ -63,7 +65,35 @@ function createTaskCard(task) {
   card.addEventListener("dragstart", dragStart);
   card.addEventListener("dragend", dragEnd);
 
+  // Handle content editing
+  const textarea = card.querySelector('.task-content');
+  textarea.addEventListener('blur', handleTaskEdit);
+  textarea.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      textarea.blur();
+    }
+  });
+
   return card;
+}
+
+/* Handle task content editing */
+function handleTaskEdit(event) {
+  const textarea = event.target;
+  const taskId = textarea.dataset.taskId;
+  const newContent = textarea.value.trim();
+  
+  if (!newContent) return;
+
+  tasks = tasks.map(task => {
+    if (task.id === taskId) {
+      return { ...task, content: newContent };
+    }
+    return task;
+  });
+  
+  saveTasks();
 }
 
 /* Add a new task from form data */

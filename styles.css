@@ -60,6 +60,7 @@
     flex: 1 1 auto; /* Allow growing and shrinking */
     display: flex;
     flex-direction: column;
+    gap: 8px;
 }
 
 /* Ensure card text fills available space */
@@ -112,4 +113,22 @@
   color: #6c757d;
   margin-bottom: 0.5rem;
   padding-left: 10px; /* Align with the row content */
+}
+
+/* Style for editable task content */
+.task-content {
+    border: none;
+    resize: none;
+    width: 100%;
+    background: transparent;
+    font-size: 14px;
+    padding: 0;
+    margin-right: 10px;
+    flex: 1;
+    font-family: inherit;
+}
+
+.task-content:focus {
+    outline: none;
+    background-color: rgba(0,0,0,0.03);
 }
