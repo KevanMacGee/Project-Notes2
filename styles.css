@@ -43,8 +43,27 @@
     margin-bottom: 0;
     display: flex;
     flex: 0 0 auto;
+    transition: height 0.3s ease, width 0.3s ease;
+    cursor: pointer;
 }
-  
+
+.task-card.expanded {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    height: auto;
+    min-height: 200px;
+    z-index: 1000;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+.task-card.expanded .delete-task {
+    display: none;
+}
+
 .task-card .btn-close {
     padding: 0.5rem;
     margin: -0.5rem -0.5rem -0.5rem auto;
@@ -92,12 +111,22 @@
 }
 
 .delete-task {
+    padding: 0.25rem;
+    margin: -0.25rem -0.25rem -0.25rem auto;
+    background: none;
+    border: none;
     color: #dc3545;
-    transition: color 0.2s ease;
+    opacity: 0.5;
+    transition: opacity 0.2s ease, color 0.2s ease;
 }
 
 .delete-task:hover {
     color: #bb2d3b;
+    opacity: 1;
+}
+
+.delete-task i {
+    font-size: 1rem;
 }
 
 /* Board row layout */
@@ -126,9 +155,34 @@
     margin-right: 10px;
     flex: 1;
     font-family: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.3s ease;
 }
 
 .task-content:focus {
     outline: none;
     background-color: rgba(0,0,0,0.03);
+}
+
+.task-card.expanded .task-content {
+    overflow: auto;
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* Overlay when card is expanded */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+
+.overlay.active {
+    display: block;
 }

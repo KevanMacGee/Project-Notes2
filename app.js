@@ -57,6 +57,7 @@ function createTaskCard(task) {
           <button type="button" class="btn-close delete-task" 
                   aria-label="Delete task"
                   onclick="deleteTask('${task.id}')">
+            <i class="bi bi-trash"></i>
           </button>
       </div>
   `;
@@ -65,7 +66,7 @@ function createTaskCard(task) {
   card.addEventListener("dragstart", dragStart);
   card.addEventListener("dragend", dragEnd);
 
-  // Handle content editing
+  // Handle content editing and card expansion
   const textarea = card.querySelector('.task-content');
   textarea.addEventListener('blur', handleTaskEdit);
   textarea.addEventListener('keydown', (e) => {
@@ -75,7 +76,50 @@ function createTaskCard(task) {
     }
   });
 
+  // Add click handler for expansion
+  card.addEventListener('click', (e) => {
+    // Don't expand if clicking delete button or selecting text
+    if (e.target.classList.contains('btn-close') || 
+        window.getSelection().toString()) {
+      return;
+    }
+    toggleCardExpansion(card);
+  });
+
   return card;
+}
+
+// Add these new functions to handle card expansion
+function toggleCardExpansion(card) {
+  const isExpanded = card.classList.contains('expanded');
+  const overlay = getOrCreateOverlay();
+  
+  if (!isExpanded) {
+    card.classList.add('expanded');
+    overlay.classList.add('active');
+    card.querySelector('.task-content').focus();
+  } else {
+    card.classList.remove('expanded');
+    overlay.classList.remove('active');
+  }
+}
+
+function getOrCreateOverlay() {
+  let overlay = document.querySelector('.overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'overlay';
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        const expandedCard = document.querySelector('.task-card.expanded');
+        if (expandedCard) {
+          toggleCardExpansion(expandedCard);
+        }
+      }
+    });
+    document.body.appendChild(overlay);
+  }
+  return overlay;
 }
 
 /* Handle task content editing */
