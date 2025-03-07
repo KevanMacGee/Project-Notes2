@@ -27,11 +27,12 @@
     min-height: 120px;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* Prevent wrapping */
     gap: 10px;
     padding: 5px; /* Reduced padding from 10px to 5px */
     width: 100%;
     align-items: stretch;
+    overflow-x: auto; /* Allow horizontal scrolling */
 }
   
 /* Style for individual task cards */
