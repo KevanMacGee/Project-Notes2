@@ -1,37 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <title>Kanban Board</title>
-    <!-- Bootswatch Themes -->
-    <link
-      id="lightTheme"
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.1/dist/flatly/bootstrap.min.css"
-      disabled
-    />
-    <link
-      id="darkTheme"
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.1/dist/darkly/bootstrap.min.css"
-    />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <!-- Tailwind CSS + daisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- Inline CSS -->
     <style>
-      body {
-        background-color: #fff;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      }
-
-      h1 {
-        font-size: 2rem;
-        color: #333;
-        font-weight: 600;
-      }
-
       .column-header {
         display: flex;
         align-items: center;
@@ -63,48 +43,20 @@
         background-color: #f39c12;
       }
 
-      .column-title {
-        font-weight: 500;
-      }
-
-      .task-count {
-        margin-left: 8px;
-        opacity: 0.7;
-      }
-
       .kanban-column {
         min-height: 200px;
         padding-bottom: 20px;
-        border-radius: 4px;
-        background-color: rgba(0, 0, 0, 0.03);
+        border-radius: 8px;
+        transition: background-color 0.2s ease;
       }
 
       .task-card {
-        background-color: #fff;
-        border: 1px solid #e0e0e0;
-        border-radius: 4px;
-        padding: 12px;
-        margin-bottom: 10px;
         cursor: grab;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        cursor: pointer;
-        transition: transform 0.1s ease-in-out;
+        transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
       }
 
       .task-card:hover {
         transform: scale(1.02);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-
-      .task-card .card-title {
-        font-size: 0.95rem;
-        font-weight: 500;
-        margin-bottom: 8px;
-      }
-
-      .task-card .card-text {
-        font-size: 0.85rem;
-        color: #6c757d;
       }
 
       .task-card.dragging {
@@ -112,16 +64,8 @@
       }
 
       .kanban-column.drop-target {
-        background-color: rgba(0, 0, 0, 0.05);
-      }
-
-      .delete-task {
-        color: #dc3545;
-        background: none;
-        border: none;
-        font-size: 1rem;
-        cursor: pointer;
-        padding: 0 5px;
+        background-color: oklch(var(--p) / 0.1);
+        outline: 2px dashed oklch(var(--p) / 0.3);
       }
 
       @media (max-width: 768px) {
@@ -130,67 +74,13 @@
         }
       }
 
-      body.dark-mode {
-        background-color: #1a1a1a;
-        color: #fff;
-      }
-
-      body.dark-mode h1 {
-        color: #fff;
-      }
-
-      body.dark-mode .task-card {
-        background-color: #2d2d2d;
-        border-color: #404040;
-        color: #fff;
-      }
-
-      body.dark-mode .task-card .card-text {
-        color: #adb5bd;
-      }
-
-      body.dark-mode .kanban-column.drop-target {
-        background-color: rgba(255, 255, 255, 0.05);
-      }
-
-      body.dark-mode .modal-content {
-        background-color: #2d2d2d;
-        color: #fff;
-      }
-
-      body.dark-mode .modal-header {
-        border-bottom-color: #404040;
-      }
-
-      body.dark-mode .modal-footer {
-        border-top-color: #404040;
-      }
-
-      body.dark-mode .form-control,
-      body.dark-mode .form-select {
-        background-color: #1a1a1a;
-        border-color: #404040;
-        color: #fff;
-      }
-
-      body.dark-mode .form-control:focus,
-      body.dark-mode .form-select:focus {
-        background-color: #1a1a1a;
-        color: #fff;
-      }
-
-      body.dark-mode .btn-close {
-        filter: invert(1) grayscale(100%) brightness(200%);
-      }
-
       .url-item {
         transition: all 0.3s ease;
-        border-left: 4px solid #3498db;
+        border-left: 4px solid oklch(var(--in));
       }
 
       .url-item:hover {
         transform: translateX(5px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
 
       .url-title {
@@ -198,99 +88,21 @@
         font-weight: 500;
       }
 
-      .url-description {
-        color: #6c757d;
-      }
-
-      .empty-state {
-        padding: 3rem;
-        text-align: center;
-        opacity: 0.7;
-      }
-
-      .validation-message {
-        font-size: 0.875rem;
-        margin-top: 0.25rem;
-      }
-
-      .url-section {
-        margin-top: 4rem;
-        padding-top: 2rem;
-        border-top: 2px solid rgba(0, 0, 0, 0.2);
-      }
-
-      .form-check-label i {
-        font-size: 1.2rem;
-        vertical-align: middle;
-      }
-
-      body.dark-mode .url-section {
-        border-top-color: rgba(255, 255, 255, 0.2);
-      }
-
-      .board-tabs .nav-link {
-        cursor: pointer;
-        user-select: none;
-      }
-
-      .board-tabs .nav-link .close-board {
-        display: inline-block;
-        margin-left: 6px;
-        font-size: 0.75rem;
-        opacity: 0;
-        transition: opacity 0.15s;
-        cursor: pointer;
-      }
-
-      .board-tabs .nav-link:hover .close-board,
-      .board-tabs .nav-link.active .close-board {
-        opacity: 0.6;
-      }
-
-      .board-tabs .nav-link .close-board:hover {
-        opacity: 1;
-      }
-
-      body.dark-mode .board-tabs .nav-link {
-        color: #adb5bd;
-      }
-
-      body.dark-mode .board-tabs .nav-link.active {
-        color: #fff;
-        background-color: #2d2d2d;
-        border-color: #404040 #404040 #2d2d2d;
-      }
-
-      body.dark-mode .board-tabs .nav-link:hover:not(.active) {
-        border-color: #404040 #404040 #404040;
-        background-color: rgba(255, 255, 255, 0.05);
-      }
-
-      body.dark-mode .board-tabs {
-        border-bottom-color: #404040;
-      }
-
       .save-indicator {
         font-size: 0.85rem;
         white-space: nowrap;
       }
 
-      .save-indicator.saving,
-      .save-indicator.saved,
-      .save-indicator.error {
-        opacity: 1;
-      }
-
       .save-indicator.saving {
-        color: #f39c12;
+        color: oklch(var(--wa));
       }
 
       .save-indicator.saved {
-        color: #18bc9c;
+        color: oklch(var(--su));
       }
 
       .save-indicator.error {
-        color: #dc3545;
+        color: oklch(var(--er));
       }
 
       @keyframes spin {
@@ -302,208 +114,191 @@
         animation: spin 1s linear infinite;
         display: inline-block;
       }
+
+      .board-tabs .close-board {
+        display: inline-block;
+        margin-left: 6px;
+        font-size: 0.75rem;
+        opacity: 0;
+        transition: opacity 0.15s;
+        cursor: pointer;
+      }
+
+      .board-tabs .tab:hover .close-board,
+      .board-tabs .tab.tab-active .close-board {
+        opacity: 0.6;
+      }
+
+      .board-tabs .close-board:hover {
+        opacity: 1;
+      }
     </style>
   </head>
   <body>
-    <div class="container-fluid p-4">
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="mb-0">Kanban</h1>
-        <div class="d-flex align-items-center gap-3">
-          <span id="saveIndicator" class="save-indicator d-flex align-items-center"></span>
-          <div class="form-check form-switch d-flex align-items-center">
-            <input class="form-check-input me-3" type="checkbox" id="darkModeToggle" checked />
-            <label class="form-check-label" for="darkModeToggle">
-              <i class="bi bi-moon-stars"></i>
-            </label>
-          </div>
-          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#task-modal">Add Task</button>
-          <button class="btn btn-secondary" id="exportDataBtn">Export Data</button>
-          <button class="btn btn-secondary" id="importDataBtn">Import Data</button>
-          <input type="file" id="importFileInput" accept="application/json" style="display: none" />
-          <button class="btn btn-secondary" id="openFileBtn" style="display: none">
-            <i class="bi bi-folder2-open"></i> Open File
-          </button>
-          <button class="btn btn-secondary" id="saveAsFileBtn" style="display: none">
-            <i class="bi bi-save"></i> Save As
-          </button>
+    <div class="container mx-auto px-4 py-6 max-w-full">
+      <!-- Header / Toolbar -->
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <h1 class="text-2xl font-semibold m-0">Kanban</h1>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span id="saveIndicator" class="save-indicator"></span>
+          <select id="themeSelect" class="select select-bordered select-sm w-36"></select>
+          <button class="btn btn-primary btn-sm" id="addTaskBtn">Add Task</button>
+          <button class="btn btn-ghost btn-sm" id="exportDataBtn">Export</button>
+          <button class="btn btn-ghost btn-sm" id="importDataBtn">Import</button>
+          <input type="file" id="importFileInput" accept="application/json" class="hidden" />
+          <button class="btn btn-ghost btn-sm hidden" id="openFileBtn">📂 Open File</button>
+          <button class="btn btn-ghost btn-sm hidden" id="saveAsFileBtn">💾 Save As</button>
         </div>
       </div>
 
-      <ul class="nav nav-tabs board-tabs mb-3" id="boardTabs"></ul>
+      <!-- Board Tabs -->
+      <div role="tablist" class="tabs tabs-border board-tabs mb-4" id="boardTabs"></div>
 
-      <div class="row kanban-board">
+      <!-- Kanban Columns -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- To Do Column -->
-        <div class="col-md-3 mb-4">
+        <div>
           <div class="column-header">
             <span class="status-indicator not-started"></span>
-            <span class="column-title">Not started</span>
-            <span class="task-count">0</span>
+            <span class="font-medium">Not started</span>
+            <span class="task-count ml-2 opacity-60">0</span>
           </div>
-          <div class="kanban-column" id="todo" ondragover="allowDrop(event)" ondrop="drop(event)">
-            <!-- Tasks will be added here dynamically -->
-          </div>
+          <div class="kanban-column bg-base-200/50 p-2" id="todo" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
         </div>
 
         <!-- In Progress Column -->
-        <div class="col-md-3 mb-4">
+        <div>
           <div class="column-header">
             <span class="status-indicator in-progress"></span>
-            <span class="column-title">In progress</span>
-            <span class="task-count">0</span>
+            <span class="font-medium">In progress</span>
+            <span class="task-count ml-2 opacity-60">0</span>
           </div>
-          <div class="kanban-column" id="inprogress" ondragover="allowDrop(event)" ondrop="drop(event)">
-            <!-- Tasks will be added here dynamically -->
-          </div>
+          <div class="kanban-column bg-base-200/50 p-2" id="inprogress" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
         </div>
 
         <!-- Done Column -->
-        <div class="col-md-3 mb-4">
+        <div>
           <div class="column-header">
             <span class="status-indicator done"></span>
-            <span class="column-title">Done</span>
-            <span class="task-count">0</span>
+            <span class="font-medium">Done</span>
+            <span class="task-count ml-2 opacity-60">0</span>
           </div>
-          <div class="kanban-column" id="done" ondragover="allowDrop(event)" ondrop="drop(event)">
-            <!-- Tasks will be added here dynamically -->
-          </div>
+          <div class="kanban-column bg-base-200/50 p-2" id="done" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
         </div>
 
         <!-- Holding Area Column -->
-        <div class="col-md-3 mb-4">
+        <div>
           <div class="column-header">
             <span class="status-indicator holding"></span>
-            <span class="column-title">Holding Area</span>
-            <span class="task-count">0</span>
+            <span class="font-medium">Holding Area</span>
+            <span class="task-count ml-2 opacity-60">0</span>
           </div>
-          <div class="kanban-column" id="holding" ondragover="allowDrop(event)" ondrop="drop(event)">
-            <!-- Tasks will be added here dynamically -->
-          </div>
+          <div class="kanban-column bg-base-200/50 p-2" id="holding" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
         </div>
       </div>
     </div>
 
-    <div class="container-fluid p-4">
-      <div class="url-section">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h1 class="mb-0">URL Collection</h1>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUrlModal">
-            Add URL
-          </button>
+    <!-- URL Collection Section -->
+    <div class="container mx-auto px-4 py-6 max-w-full">
+      <div class="url-section mt-16 pt-8 border-t-2 border-base-300">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-semibold m-0">URL Collection</h2>
+          <button type="button" class="btn btn-primary btn-sm" id="addUrlBtn">Add URL</button>
         </div>
-
-        <div id="url-list" class="list-group">
-          <div id="empty-state" class="empty-state">
-            <h4>No URLs added yet</h4>
-            <p>Click the "Add URL" button to get started</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Add URL Modal -->
-    <div class="modal fade" id="addUrlModal" tabindex="-1" aria-labelledby="addUrlModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="addUrlModalLabel">Add New URL</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form id="url-form">
-              <div class="mb-3">
-                <label for="url-input" class="form-label">URL (required)</label>
-                <input type="url" class="form-control" id="url-input" placeholder="https://example.com" required />
-                <div id="url-validation" class="validation-message text-danger"></div>
-              </div>
-              <div class="mb-3">
-                <label for="description-input" class="form-label">Description (optional)</label>
-                <textarea
-                  class="form-control"
-                  id="description-input"
-                  rows="3"
-                  placeholder="Enter a description for this URL"
-                ></textarea>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" id="save-url-btn">Save URL</button>
+        <div id="url-list" class="flex flex-col gap-2">
+          <div id="empty-state" class="text-center py-12 opacity-60">
+            <h4 class="text-lg font-medium">No URLs added yet</h4>
+            <p class="text-sm mt-1">Click the "Add URL" button to get started</p>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Success Toast -->
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-      <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header bg-success text-white">
-          <strong class="me-auto">Success</strong>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">URL added successfully!</div>
+    <div id="successToast" class="toast toast-end z-50 hidden">
+      <div class="alert alert-success">
+        <span>URL added successfully!</span>
       </div>
     </div>
 
     <!-- Task Modal -->
-    <div class="modal fade" id="task-modal" tabindex="-1" aria-labelledby="task-modal-label" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="task-modal-label">Add/Edit Task</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <dialog id="task-modal" class="modal">
+      <div class="modal-box">
+        <h3 class="font-bold text-lg" id="task-modal-label">Add / Edit Task</h3>
+        <form id="task-form" class="flex flex-col gap-4 mt-4">
+          <div>
+            <label class="label" for="task-title">
+              <span class="label-text">Title</span>
+            </label>
+            <input type="text" id="task-title" class="input input-bordered w-full" required />
           </div>
-          <div class="modal-body">
-            <form id="task-form">
-              <div class="mb-3">
-                <label for="task-title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="task-title" required />
-              </div>
-              <div class="mb-3">
-                <label for="task-description" class="form-label">Description</label>
-                <textarea class="form-control" id="task-description" rows="3"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="task-column" class="form-label">Column</label>
-                <select class="form-select" id="task-column" required>
-                  <option value="todo">Not started</option>
-                  <option value="inprogress">In Progress</option>
-                  <option value="done">Done</option>
-                  <option value="holding">Holding Area</option>
-                </select>
-              </div>
-            </form>
+          <div>
+            <label class="label" for="task-description">
+              <span class="label-text">Description</span>
+            </label>
+            <textarea id="task-description" class="textarea textarea-bordered w-full" rows="3"></textarea>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" id="save-task">Save Task</button>
+          <div>
+            <label class="label" for="task-column">
+              <span class="label-text">Column</span>
+            </label>
+            <select id="task-column" class="select select-bordered w-full" required>
+              <option value="todo">Not started</option>
+              <option value="inprogress">In Progress</option>
+              <option value="done">Done</option>
+              <option value="holding">Holding Area</option>
+            </select>
           </div>
+        </form>
+        <div class="modal-action">
+          <button type="button" class="btn btn-ghost" id="cancel-task">Cancel</button>
+          <button type="button" class="btn btn-primary" id="save-task">Save Task</button>
         </div>
       </div>
-    </div>
+      <form method="dialog" class="modal-backdrop"><button>close</button></form>
+    </dialog>
 
-    <!-- File Setup Modal (shown on first load when File System Access API is available) -->
-    <div class="modal fade" id="fileSetupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Open Data File</h5>
+    <!-- Add URL Modal -->
+    <dialog id="addUrlModal" class="modal">
+      <div class="modal-box">
+        <h3 class="font-bold text-lg">Add New URL</h3>
+        <form id="url-form" class="flex flex-col gap-4 mt-4">
+          <div>
+            <label class="label" for="url-input">
+              <span class="label-text">URL (required)</span>
+            </label>
+            <input type="url" id="url-input" class="input input-bordered w-full" placeholder="https://example.com" required />
+            <div id="url-validation" class="text-error text-xs mt-1"></div>
           </div>
-          <div class="modal-body">
-            <p>Choose an existing data file or create a new one to get started.</p>
-            <p class="text-muted small mb-0">Your data will be saved directly to this file after every change.</p>
+          <div>
+            <label class="label" for="description-input">
+              <span class="label-text">Description (optional)</span>
+            </label>
+            <textarea id="description-input" class="textarea textarea-bordered w-full" rows="3" placeholder="Enter a description for this URL"></textarea>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" id="setupSkipBtn">Skip</button>
-            <button type="button" class="btn btn-primary" id="setupOpenBtn">Open Existing File</button>
-            <button type="button" class="btn btn-secondary" id="setupCreateBtn">Create New File</button>
-          </div>
+        </form>
+        <div class="modal-action">
+          <button type="button" class="btn btn-ghost" id="cancel-url">Cancel</button>
+          <button type="button" class="btn btn-primary" id="save-url-btn">Save URL</button>
         </div>
       </div>
-    </div>
+      <form method="dialog" class="modal-backdrop"><button>close</button></form>
+    </dialog>
 
-    <!-- Bootstrap 5 JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- File Setup Modal -->
+    <dialog id="fileSetupModal" class="modal">
+      <div class="modal-box">
+        <h3 class="font-bold text-lg">Open Data File</h3>
+        <p class="py-4">Choose an existing data file or create a new one to get started.</p>
+        <p class="text-sm text-base-content/60 mb-4">Your data will be saved directly to this file after every change.</p>
+        <div class="modal-action">
+          <button type="button" class="btn btn-ghost" id="setupSkipBtn">Skip</button>
+          <button type="button" class="btn btn-primary" id="setupOpenBtn">Open Existing File</button>
+          <button type="button" class="btn btn-secondary" id="setupCreateBtn">Create New File</button>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop"><button>close</button></form>
+    </dialog>
 
     <!-- Inline JavaScript -->
     <script>
@@ -583,19 +378,19 @@
       function updateSaveIndicator(status) {
         const indicator = document.getElementById("saveIndicator");
         if (!indicator) return;
-        indicator.className = "save-indicator d-flex align-items-center " + status;
+        indicator.className = "save-indicator " + status;
         switch (status) {
           case "saving":
-            indicator.innerHTML = '<i class="bi bi-arrow-repeat spin"></i>&nbsp;Saving...';
+            indicator.innerHTML = '<span class="spin">⟳</span>&nbsp;Saving...';
             break;
           case "saved":
-            indicator.innerHTML = '<i class="bi bi-check-circle"></i>&nbsp;Saved';
+            indicator.innerHTML = '✓&nbsp;Saved';
             break;
           case "error":
-            indicator.innerHTML = '<i class="bi bi-x-circle"></i>&nbsp;Error';
+            indicator.innerHTML = '✕&nbsp;Error';
             break;
           default:
-            indicator.innerHTML = '<i class="bi bi-check-circle"></i>&nbsp;Saved';
+            indicator.innerHTML = '✓&nbsp;Saved';
         }
       }
 
@@ -655,8 +450,7 @@
           await storeFileHandle(handle);
           const loaded = await loadFromFile();
           if (!loaded) loadState();
-          const setupModal = bootstrap.Modal.getInstance(document.getElementById("fileSetupModal"));
-          if (setupModal) setupModal.hide();
+          document.getElementById("fileSetupModal").close();
         } catch (e) {
           if (e.name !== "AbortError") console.error("Error opening file:", e);
         }
@@ -674,8 +468,7 @@
           fileHandle = handle;
           await storeFileHandle(handle);
           await saveToFile();
-          const setupModal = bootstrap.Modal.getInstance(document.getElementById("fileSetupModal"));
-          if (setupModal) setupModal.hide();
+          document.getElementById("fileSetupModal").close();
         } catch (e) {
           if (e.name !== "AbortError") console.error("Error saving file:", e);
         }
@@ -683,20 +476,19 @@
 
       // Initialize file system on startup
       async function initStorage() {
-        // Always load state first so tabs render regardless of API support
         loadState();
 
         if (!isFileSystemSupported) {
-          document.getElementById("exportDataBtn").style.display = "";
-          document.getElementById("importDataBtn").style.display = "";
-          document.getElementById("openFileBtn").style.display = "none";
-          document.getElementById("saveAsFileBtn").style.display = "none";
+          document.getElementById("exportDataBtn").classList.remove("hidden");
+          document.getElementById("importDataBtn").classList.remove("hidden");
+          document.getElementById("openFileBtn").classList.add("hidden");
+          document.getElementById("saveAsFileBtn").classList.add("hidden");
           return;
         }
-        document.getElementById("exportDataBtn").style.display = "none";
-        document.getElementById("importDataBtn").style.display = "none";
-        document.getElementById("openFileBtn").style.display = "";
-        document.getElementById("saveAsFileBtn").style.display = "";
+        document.getElementById("exportDataBtn").classList.add("hidden");
+        document.getElementById("importDataBtn").classList.add("hidden");
+        document.getElementById("openFileBtn").classList.remove("hidden");
+        document.getElementById("saveAsFileBtn").classList.remove("hidden");
         try {
           fileHandle = await getStoredFileHandle();
           if (fileHandle && (await verifyPermission(fileHandle))) {
@@ -704,16 +496,10 @@
             return;
           }
         } catch (e) {}
-        showFileSetupModal();
-      }
-
-      function showFileSetupModal() {
-        const modal = new bootstrap.Modal(document.getElementById("fileSetupModal"));
-        modal.show();
+        document.getElementById("fileSetupModal").showModal();
       }
 
       // DOM Elements
-      const taskModal = new bootstrap.Modal(document.getElementById("task-modal"));
       const saveTaskBtn = document.getElementById("save-task");
       const taskForm = document.getElementById("task-form");
       const columns = ["todo", "inprogress", "done", "holding"];
@@ -731,7 +517,6 @@
             appState.boards = [createBoardTemplate("Default Board")];
           }
         } else {
-          // Migration: check for old-format keys
           const oldTasks = localStorage.getItem(`kanbanTasks-${fileName}`);
           const oldUrls = localStorage.getItem(`urls-${fileName}`);
           const board = createBoardTemplate("Default Board");
@@ -834,11 +619,10 @@
         const tabContainer = document.getElementById("boardTabs");
         tabContainer.innerHTML = "";
         appState.boards.forEach((board, idx) => {
-          const li = document.createElement("li");
-          li.className = "nav-item";
           const btn = document.createElement("button");
-          btn.className = "nav-link" + (idx === appState.activeTabIndex ? " active" : "");
-          btn.innerHTML = board.name + '<span class="close-board" title="Delete board">&times;</span>';
+          btn.role = "tab";
+          btn.className = "tab" + (idx === appState.activeTabIndex ? " tab-active" : "");
+          btn.innerHTML = board.name + '<span class="close-board" title="Delete board">✕</span>';
           btn.addEventListener("click", (e) => {
             if (e.target.classList.contains("close-board")) {
               deleteBoard(idx);
@@ -850,18 +634,14 @@
             e.preventDefault();
             renameBoard(idx);
           });
-          li.appendChild(btn);
-          tabContainer.appendChild(li);
+          tabContainer.appendChild(btn);
         });
         // Add "New Board" button
-        const addLi = document.createElement("li");
-        addLi.className = "nav-item";
         const addBtn = document.createElement("button");
-        addBtn.className = "btn btn-sm btn-outline-primary ms-2 mt-1";
+        addBtn.className = "btn btn-sm btn-ghost ml-2";
         addBtn.textContent = "+ New Board";
         addBtn.addEventListener("click", createNewBoard);
-        addLi.appendChild(addBtn);
-        tabContainer.appendChild(addLi);
+        tabContainer.appendChild(addBtn);
       }
 
       function renderUrlList() {
@@ -870,28 +650,33 @@
         urlList.innerHTML = "";
 
         if (urls.length === 0) {
-          if (!urlList.contains(emptyState)) {
-            urlList.appendChild(emptyState);
-          }
+          urlList.innerHTML = `
+            <div id="empty-state" class="text-center py-12 opacity-60">
+              <h4 class="text-lg font-medium">No URLs added yet</h4>
+              <p class="text-sm mt-1">Click the "Add URL" button to get started</p>
+            </div>
+          `;
           return;
         }
 
         urls.forEach(({ url, description }, idx) => {
           const urlItem = document.createElement("div");
-          urlItem.className = "list-group-item url-item p-3 mb-2";
+          urlItem.className = "url-item card bg-base-100 shadow-sm cursor-grab";
           urlItem.setAttribute("draggable", "true");
           urlItem.setAttribute("data-index", idx);
 
           const displayUrl = url.replace(/^https?:\/\//, "");
 
           urlItem.innerHTML = `
-            <div class="d-flex w-100 justify-content-between align-items-start">
-              <h5 class="mb-1 url-title">
-                <a href="${url}" target="_blank" rel="noopener noreferrer">${displayUrl}</a>
-              </h5>
-              <button class="delete-url text-danger" style="background: none; border: none; font-size: 1rem; cursor: pointer; padding: 0 5px;">x</button>
+            <div class="card-body p-3 flex-row justify-between items-start gap-2">
+              <div class="min-w-0">
+                <h5 class="url-title font-medium text-sm">
+                  <a href="${url}" target="_blank" rel="noopener noreferrer" class="link link-primary">${displayUrl}</a>
+                </h5>
+                ${description ? `<p class="text-xs text-base-content/60 mt-0.5">${description}</p>` : ""}
+              </div>
+              <button class="delete-url btn btn-ghost btn-xs text-error shrink-0">✕</button>
             </div>
-            ${description ? `<p class="mb-1 url-description">${description}</p>` : ""}
           `;
 
           // Delete handler
@@ -939,12 +724,10 @@
 
       // Render all tasks
       function renderTasks() {
-        // Clear all columns
         columns.forEach((column) => {
           document.getElementById(column).innerHTML = "";
         });
 
-        // Render tasks for each column
         columns.forEach((column) => {
           const columnEl = document.getElementById(column);
 
@@ -960,17 +743,19 @@
       // Create a task card element
       function createTaskCard(task, column) {
         const taskCard = document.createElement("div");
-        taskCard.className = "task-card";
+        taskCard.className = "task-card card bg-base-100 shadow-sm border border-base-300 mb-2.5";
         taskCard.draggable = true;
         taskCard.dataset.id = task.id;
         taskCard.dataset.column = column;
 
         taskCard.innerHTML = `
-          <div class="d-flex justify-content-between align-items-start">
-            <h5 class="card-title">${task.title}</h5>
-            <button class="delete-task" data-id="${task.id}" data-column="${column}">x</button>
+          <div class="card-body p-3">
+            <div class="flex justify-between items-start gap-2">
+              <h5 class="card-title text-sm font-medium">${task.title}</h5>
+              <button class="delete-task btn btn-ghost btn-xs text-error shrink-0" data-id="${task.id}" data-column="${column}">✕</button>
+            </div>
+            <p class="text-xs text-base-content/60">${task.description || ""}</p>
           </div>
-          <p class="card-text">${task.description || ""}</p>
         `;
 
         // Add drag event listeners
@@ -979,8 +764,7 @@
 
         // Add click handler for editing
         taskCard.addEventListener("click", (event) => {
-          // Don't open edit modal if delete button was clicked
-          if (!event.target.classList.contains("delete-task")) {
+          if (!event.target.classList.contains("delete-task") && !event.target.closest(".delete-task")) {
             openEditModal(task, column);
           }
         });
@@ -994,10 +778,9 @@
       // Update task counts for each column
       function updateTaskCounts() {
         columns.forEach((column) => {
-          const columnHeader = document.querySelector(
-            `.col-md-3:nth-child(${columns.indexOf(column) + 1}) .task-count`
-          );
-          columnHeader.textContent = tasks[column].length;
+          const columnEl = document.getElementById(column);
+          const countEl = columnEl.parentElement.querySelector(".task-count");
+          if (countEl) countEl.textContent = tasks[column].length;
         });
       }
 
@@ -1024,17 +807,11 @@
 
       // Move a task from one column to another
       function moveTask(id, fromColumn, toColumn) {
-        // Find the task in the source column
         const taskIndex = tasks[fromColumn].findIndex((task) => task.id === id);
 
         if (taskIndex !== -1) {
-          // Remove the task from the source column
           const [task] = tasks[fromColumn].splice(taskIndex, 1);
-
-          // Add the task to the destination column
           tasks[toColumn].push(task);
-
-          // Save changes
           saveState();
           renderTasks();
         }
@@ -1047,13 +824,11 @@
         editingTaskId = task.id;
         editingTaskColumn = column;
 
-        // Fill the form with task data
         document.getElementById("task-title").value = task.title;
         document.getElementById("task-description").value = task.description || "";
         document.getElementById("task-column").value = column;
 
-        // Open the modal
-        taskModal.show();
+        document.getElementById("task-modal").showModal();
       }
 
       function updateTask(id, column, title, description, newColumn) {
@@ -1066,17 +841,13 @@
           description,
         };
 
-        // Remove from old column
         tasks[column].splice(taskIndex, 1);
-
-        // Add to new column
         tasks[newColumn].push(updatedTask);
 
         saveState();
         renderTasks();
       }
 
-      // Modify handleSaveTask to handle both create and edit
       function handleSaveTask() {
         const titleInput = document.getElementById("task-title");
         const descriptionInput = document.getElementById("task-description");
@@ -1088,25 +859,24 @@
 
         if (title) {
           if (editingTaskId) {
-            // Update existing task
             updateTask(editingTaskId, editingTaskColumn, title, description, column);
             editingTaskId = null;
             editingTaskColumn = null;
           } else {
-            // Create new task
             addTask(title, description, column);
           }
-          taskModal.hide();
+          document.getElementById("task-modal").close();
           taskForm.reset();
         }
       }
 
       function handleDeleteTask(event) {
         event.stopPropagation();
-        const id = event.target.dataset.id;
-        const column = event.target.dataset.column;
+        const btn = event.target.closest(".delete-task");
+        if (!btn) return;
+        const id = btn.dataset.id;
+        const column = btn.dataset.column;
 
-        // Add confirmation dialog
         if (confirm("Are you sure you want to delete this task?")) {
           deleteTask(id, column);
         }
@@ -1127,28 +897,30 @@
 
       function handleDragEnd(event) {
         event.target.classList.remove("dragging");
-        // Remove drop-target class from all columns
         document.querySelectorAll(".kanban-column").forEach((column) => column.classList.remove("drop-target"));
       }
 
       function allowDrop(event) {
         event.preventDefault();
-        // Add drop-target class to the column
         event.currentTarget.classList.add("drop-target");
       }
 
       function drop(event) {
         event.preventDefault();
 
-        // Remove drop-target class from all columns
         document.querySelectorAll(".kanban-column").forEach((column) => column.classList.remove("drop-target"));
 
-        // Get the data from the drag operation
         const data = JSON.parse(event.dataTransfer.getData("text/plain"));
         const toColumn = event.currentTarget.id;
 
-        // Move the task
         moveTask(data.id, data.column, toColumn);
+      }
+
+      // Show success toast
+      function showSuccessToast() {
+        const toast = document.getElementById("successToast");
+        toast.classList.remove("hidden");
+        setTimeout(() => toast.classList.add("hidden"), 3000);
       }
 
       // Global function to add a URL to the list
@@ -1156,9 +928,7 @@
         urls.push({ url, description });
         saveState();
         renderUrlList();
-
-        const successToast = new bootstrap.Toast(document.getElementById("successToast"));
-        successToast.show();
+        showSuccessToast();
       }
 
       // Global function to delete a URL
@@ -1177,10 +947,8 @@
         const descriptionInput = document.getElementById("description-input");
         const saveUrlBtn = document.getElementById("save-url-btn");
         const urlValidation = document.getElementById("url-validation");
-        const addUrlModal = new bootstrap.Modal(document.getElementById("addUrlModal"));
 
         function isValidUrl(urlString) {
-          // Accept file:// URLs directly using only the URL constructor
           if (/^file:\/\//i.test(urlString)) {
             try {
               new URL(urlString);
@@ -1190,20 +958,16 @@
             }
           }
 
-          // If the URL doesn't have any protocol, add https://
           if (!/^(?:[a-z]+:)?\/\//i.test(urlString)) {
             urlString = "https://" + urlString;
           }
 
-          // Regular expression to validate web URL structure
           const urlPattern = /^(https?:\/\/)?(www\.)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/.*)?$/;
 
-          // Check if the URL matches the pattern
           if (!urlPattern.test(urlString)) {
             return false;
           }
 
-          // Validate using the URL constructor
           try {
             new URL(urlString);
             return true;
@@ -1216,7 +980,6 @@
           let url = urlInput.value.trim();
           const description = descriptionInput.value.trim();
 
-          // Only add https:// if the URL does not start with any protocol (including file://)
           if (!/^(?:[a-z]+:)?\/\//i.test(url)) {
             url = "https://" + url;
           }
@@ -1229,73 +992,33 @@
           urlValidation.textContent = "";
           addUrlToList(url, description);
           urlForm.reset();
-          addUrlModal.hide();
+          document.getElementById("addUrlModal").close();
         });
       }
 
-      // Event Listeners
-      document.addEventListener("DOMContentLoaded", () => {
-        initStorage();
-        initDarkMode(); // Initialize dark mode
-        initUrlCollector(); // Initialize URL collector
-        saveTaskBtn.addEventListener("click", handleSaveTask);
+      // Theme picker
+      const THEMES = [
+        "light", "dark", "cupcake", "bumblebee", "emerald", "corporate",
+        "synthwave", "retro", "cyberpunk", "valentine", "halloween", "garden",
+        "forest", "aqua", "lofi", "pastel", "fantasy", "wireframe", "black",
+        "luxury", "dracula", "cmyk", "autumn", "business", "acid", "lemonade",
+        "night", "coffee", "winter", "dim", "nord", "sunset"
+      ];
 
-        // File System Access API buttons
-        document.getElementById("openFileBtn").addEventListener("click", openDataFile);
-        document.getElementById("saveAsFileBtn").addEventListener("click", saveAsDataFile);
-        document.getElementById("setupOpenBtn").addEventListener("click", openDataFile);
-        document.getElementById("setupCreateBtn").addEventListener("click", saveAsDataFile);
-        document.getElementById("setupSkipBtn").addEventListener("click", () => {
-          const setupModal = bootstrap.Modal.getInstance(document.getElementById("fileSetupModal"));
-          if (setupModal) setupModal.hide();
+      function initTheme() {
+        const select = document.getElementById("themeSelect");
+        THEMES.forEach(t => {
+          const opt = document.createElement("option");
+          opt.value = t;
+          opt.textContent = t.charAt(0).toUpperCase() + t.slice(1);
+          select.appendChild(opt);
         });
-
-        // Add drag and drop event listeners to columns
-        columns.forEach((column) => {
-          const columnEl = document.getElementById(column);
-          columnEl.addEventListener("dragover", allowDrop);
-          columnEl.addEventListener("drop", drop);
-          columnEl.addEventListener("dragleave", (event) => {
-            event.currentTarget.classList.remove("drop-target");
-          });
-        });
-
-        // Flush pending file saves when page is closing or hidden
-        window.addEventListener("beforeunload", () => { flushSave(); });
-        document.addEventListener("visibilitychange", () => {
-          if (document.visibilityState === "hidden") flushSave();
-        });
-      });
-
-      // Add after the existing event listeners
-
-      // Dark Mode Toggle
-      function initDarkMode() {
-        const darkModeToggle = document.getElementById("darkModeToggle");
-        const lightTheme = document.getElementById("lightTheme");
-        const darkTheme = document.getElementById("darkTheme");
-
-        // Check for saved preference, default to dark mode if no preference
-        const isDarkMode = localStorage.getItem("darkMode") !== "false";
-
-        function toggleTheme(isDark) {
-          document.body.classList.toggle("dark-mode", isDark);
-          lightTheme.disabled = isDark;
-          darkTheme.disabled = !isDark;
-          localStorage.setItem("darkMode", isDark);
-
-          // Update icon with correct Bootstrap Icons classes
-          const icon = darkModeToggle.nextElementSibling.querySelector("i");
-          icon.className = isDark ? "bi bi-moon-stars-fill" : "bi bi-sun-fill";
-        }
-
-        // Set initial theme
-        toggleTheme(isDarkMode);
-        darkModeToggle.checked = isDarkMode;
-
-        // Add event listener for toggle changes
-        darkModeToggle.addEventListener("change", (e) => {
-          toggleTheme(e.target.checked);
+        const saved = localStorage.getItem("daisyui-theme") || "dark";
+        document.documentElement.setAttribute("data-theme", saved);
+        select.value = saved;
+        select.addEventListener("change", (e) => {
+          document.documentElement.setAttribute("data-theme", e.target.value);
+          localStorage.setItem("daisyui-theme", e.target.value);
         });
       }
 
@@ -1313,9 +1036,6 @@
         link.click();
       }
 
-      // Add event listener to the "Export Data" button
-      document.getElementById("exportDataBtn").addEventListener("click", exportData);
-
       // Import functionality with confirmation
       function importData(event) {
         const file = event.target.files[0];
@@ -1332,10 +1052,8 @@
             const importedData = JSON.parse(e.target.result);
 
             if (importedData.appState && importedData.appState.boards) {
-              // New multi-board format
               appState = importedData.appState;
             } else if (importedData.tasks && importedData.tasks.todo) {
-              // Old single-board format: wrap in a board
               appState = {
                 activeTabIndex: 0,
                 boards: [{
@@ -1360,13 +1078,68 @@
         reader.readAsText(file);
       }
 
-      // Trigger file input when "Import Data" button is clicked
-      document.getElementById("importDataBtn").addEventListener("click", () => {
-        document.getElementById("importFileInput").click();
-      });
+      // Event Listeners
+      document.addEventListener("DOMContentLoaded", () => {
+        initTheme();
+        initStorage();
+        initUrlCollector();
+        saveTaskBtn.addEventListener("click", handleSaveTask);
 
-      // Handle file input change event
-      document.getElementById("importFileInput").addEventListener("change", importData);
+        // Add Task button
+        document.getElementById("addTaskBtn").addEventListener("click", () => {
+          editingTaskId = null;
+          editingTaskColumn = null;
+          taskForm.reset();
+          document.getElementById("task-modal").showModal();
+        });
+
+        // Cancel buttons for modals
+        document.getElementById("cancel-task").addEventListener("click", () => {
+          document.getElementById("task-modal").close();
+        });
+        document.getElementById("cancel-url").addEventListener("click", () => {
+          document.getElementById("addUrlModal").close();
+        });
+
+        // Add URL button
+        document.getElementById("addUrlBtn").addEventListener("click", () => {
+          document.getElementById("url-form").reset();
+          document.getElementById("url-validation").textContent = "";
+          document.getElementById("addUrlModal").showModal();
+        });
+
+        // Export / Import
+        document.getElementById("exportDataBtn").addEventListener("click", exportData);
+        document.getElementById("importDataBtn").addEventListener("click", () => {
+          document.getElementById("importFileInput").click();
+        });
+        document.getElementById("importFileInput").addEventListener("change", importData);
+
+        // File System Access API buttons
+        document.getElementById("openFileBtn").addEventListener("click", openDataFile);
+        document.getElementById("saveAsFileBtn").addEventListener("click", saveAsDataFile);
+        document.getElementById("setupOpenBtn").addEventListener("click", openDataFile);
+        document.getElementById("setupCreateBtn").addEventListener("click", saveAsDataFile);
+        document.getElementById("setupSkipBtn").addEventListener("click", () => {
+          document.getElementById("fileSetupModal").close();
+        });
+
+        // Add drag and drop event listeners to columns
+        columns.forEach((column) => {
+          const columnEl = document.getElementById(column);
+          columnEl.addEventListener("dragover", allowDrop);
+          columnEl.addEventListener("drop", drop);
+          columnEl.addEventListener("dragleave", (event) => {
+            event.currentTarget.classList.remove("drop-target");
+          });
+        });
+
+        // Flush pending file saves when page is closing or hidden
+        window.addEventListener("beforeunload", () => { flushSave(); });
+        document.addEventListener("visibilitychange", () => {
+          if (document.visibilityState === "hidden") flushSave();
+        });
+      });
     </script>
   </body>
 </html>
