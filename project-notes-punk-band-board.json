@@ -1,0 +1,181 @@
+{
+  "appState": {
+    "activeTabIndex": 0,
+    "boards": [
+      {
+        "id": "mow9pm42p64lz8x7evr",
+        "name": "Punk Band Website",
+        "tasks": {
+          "todo": [
+            {
+              "id": "punk_todo_tour_dates",
+              "title": "Build tour dates / shows section",
+              "description": "Include city, venue, date, age restriction, ticket button, and a Sold Out state.",
+              "createdAt": "2026-05-31T14:06:00.000Z"
+            },
+            {
+              "id": "punk_todo_music_section",
+              "title": "Add music embeds",
+              "description": "Add space for Spotify/Bandcamp/YouTube embeds plus a featured single or album card.",
+              "createdAt": "2026-05-31T14:07:00.000Z"
+            },
+            {
+              "id": "punk_todo_contact_press",
+              "title": "Add contact and press kit area",
+              "description": "Include booking email, press email, downloadable logo/photo placeholders, and social links.",
+              "createdAt": "2026-05-31T14:09:00.000Z"
+            }
+          ],
+          "inprogress": [
+            {
+              "id": "punk_progress_visual_direction",
+              "title": "Lock in visual direction",
+              "description": "Gritty but readable: black/cream base, red accent, photocopied flyer textures, chunky headings, and clean body text.",
+              "createdAt": "2026-05-31T14:11:00.000Z"
+            },
+            {
+              "id": "punk_progress_assets",
+              "title": "Collect band assets",
+              "description": "Need logo, 3 live photos, album art, short bio, social handles, and current show list.",
+              "createdAt": "2026-05-31T14:12:00.000Z"
+            }
+          ],
+          "done": [
+            {
+              "id": "punk_done_structure",
+              "title": "Sketch page sections",
+              "description": "Header, hero, latest release, tour dates, merch, band bio, gallery, email signup, footer.",
+              "createdAt": "2026-05-31T14:13:00.000Z"
+            },
+            {
+              "id": "punk_done_placeholder_name",
+              "title": "Choose placeholder band identity",
+              "description": "Working name: The Static Rackets. Tone: loud, fast, scrappy, slightly funny, not too polished.",
+              "createdAt": "2026-05-31T14:14:00.000Z"
+            },
+            {
+              "id": "punk_todo_merch_grid",
+              "title": "Create merch preview grid",
+              "description": "Show 3–6 items: shirt, hoodie, vinyl, sticker pack. Each card needs image, price, and external shop link.",
+              "createdAt": "2026-05-31T14:08:00.000Z"
+            }
+          ],
+          "holding": [
+            {
+              "id": "punk_hold_ticket_platform",
+              "title": "Decide ticketing integration",
+              "description": "Hold until the band picks a platform: Ticketweb, Dice, Eventbrite, venue links, or manual ticket URLs.",
+              "createdAt": "2026-05-31T14:15:00.000Z"
+            },
+            {
+              "id": "punk_hold_cms",
+              "title": "Maybe add a simple admin/CMS later",
+              "description": "Not needed for the first version unless the band needs to update shows without touching code.",
+              "createdAt": "2026-05-31T14:16:00.000Z"
+            }
+          ]
+        },
+        "urls": [
+          {
+            "url": "https://bandcamp.com",
+            "description": "Music embed / artist page reference"
+          },
+          {
+            "url": "https://open.spotify.com",
+            "description": "Streaming profile and playlist embed reference"
+          },
+          {
+            "url": "https://www.youtube.com",
+            "description": "Music video, live session, or teaser embed reference"
+          },
+          {
+            "url": "https://www.eventbrite.com",
+            "description": "Possible ticketing platform reference"
+          },
+          {
+            "url": "https://linktr.ee",
+            "description": "Simple all-links landing page reference"
+          },
+          {
+            "url": "https://lucide.dev/icons",
+            "description": "Clean icon set for social/contact/action icons"
+          },
+          {
+            "url": "https://fonts.google.com/specimen/Oswald",
+            "description": "Condensed heading font idea"
+          },
+          {
+            "url": "https://fonts.google.com/specimen/Inter",
+            "description": "Readable body font idea"
+          }
+        ]
+      },
+      {
+        "id": "mow9qzaynr7dlyqu6ha",
+        "name": "Project Notes",
+        "tasks": {
+          "todo": [
+            {
+              "id": "mox6tn0wya0qrng4do",
+              "title": "Switch from Bootstrap to Tailwind",
+              "description": "",
+              "createdAt": "2026-05-08T17:27:10.544Z"
+            }
+          ],
+          "inprogress": [],
+          "done": [],
+          "holding": []
+        },
+        "urls": [
+          {
+            "url": "https://shadcnstudio.com/theme-generator",
+            "description": ""
+          },
+          {
+            "url": "https://tweakcn.com/",
+            "description": ""
+          },
+          {
+            "url": "https://daisyui.com/",
+            "description": ""
+          },
+          {
+            "url": "https://ui.shadcn.com/",
+            "description": ""
+          }
+        ]
+      },
+      {
+        "id": "mpqjrq8fcf993hioy5p",
+        "name": "Template vault",
+        "tasks": {
+          "todo": [
+            {
+              "id": "mpqjulws9g6hzl7adz5",
+              "title": "Tags don't autofill in creation step",
+              "description": "If you have already added a template and go into the edit screen, you can add more tags. If you start to type on that had already been used, it appears in the dropdown. This does not happen though on the initial step when you are creating the board to begin with. It should,",
+              "createdAt": "2026-05-29T06:37:09.868Z"
+            },
+            {
+              "id": "mpqkr7wuhtvnzkpvsts",
+              "title": "Image display is messy and alphabetical.",
+              "description": "There should be a way to designate which image(s) show first.",
+              "createdAt": "2026-05-29T07:02:31.374Z"
+            }
+          ],
+          "inprogress": [],
+          "done": [
+            {
+              "id": "mpqkoczf6axnz0333o4",
+              "title": "Image scanning doesn't respect gitignore",
+              "description": "",
+              "createdAt": "2026-05-29T07:00:17.979Z"
+            }
+          ],
+          "holding": []
+        },
+        "urls": []
+      }
+    ]
+  }
+}

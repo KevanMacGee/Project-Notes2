@@ -1,0 +1,91 @@
+{
+  "appState": {
+    "activeTabIndex": 1,
+    "boards": [
+      {
+        "id": "mow9pm42p64lz8x7evr",
+        "name": "New Board",
+        "tasks": {
+          "todo": [],
+          "inprogress": [
+            {
+              "id": "mow9pz1siqxsozw49gq",
+              "title": "sdfdsf",
+              "description": "fdsfdsf",
+              "createdAt": "2026-05-08T02:00:32.176Z"
+            }
+          ],
+          "done": [],
+          "holding": []
+        },
+        "urls": []
+      },
+      {
+        "id": "mow9qzaynr7dlyqu6ha",
+        "name": "Project Notes",
+        "tasks": {
+          "todo": [
+            {
+              "id": "mox6tn0wya0qrng4do",
+              "title": "Switch from Bootstrap to Tailwind",
+              "description": "",
+              "createdAt": "2026-05-08T17:27:10.544Z"
+            }
+          ],
+          "inprogress": [],
+          "done": [],
+          "holding": []
+        },
+        "urls": [
+          {
+            "url": "https://shadcnstudio.com/theme-generator",
+            "description": ""
+          },
+          {
+            "url": "https://tweakcn.com/",
+            "description": ""
+          },
+          {
+            "url": "https://daisyui.com/",
+            "description": ""
+          },
+          {
+            "url": "https://ui.shadcn.com/",
+            "description": ""
+          }
+        ]
+      },
+      {
+        "id": "mpqjrq8fcf993hioy5p",
+        "name": "Template vault",
+        "tasks": {
+          "todo": [
+            {
+              "id": "mpqjulws9g6hzl7adz5",
+              "title": "Tags don't autofill in creation step",
+              "description": "If you have already added a template and go into the edit screen, you can add more tags. If you start to type on that had already been used, it appears in the dropdown. This does not happen though on the initial step when you are creating the board to begin with. It should,",
+              "createdAt": "2026-05-29T06:37:09.868Z"
+            },
+            {
+              "id": "mpqkr7wuhtvnzkpvsts",
+              "title": "Image display is messy and alphabetical.",
+              "description": "There should be a way to designate which image(s) show first.",
+              "createdAt": "2026-05-29T07:02:31.374Z"
+            }
+          ],
+          "inprogress": [],
+          "done": [
+            {
+              "id": "mpqkoczf6axnz0333o4",
+              "title": "Image scanning doesn't respect gitignore",
+              "description": "",
+              "createdAt": "2026-05-29T07:00:17.979Z"
+            }
+          ],
+          "holding": []
+        },
+        "urls": []
+      }
+    ]
+  }
+}
