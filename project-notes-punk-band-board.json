@@ -1,6 +1,6 @@
 {
   "appState": {
-    "activeTabIndex": 0,
+    "activeTabIndex": 1,
     "boards": [
       {
         "id": "mow9pm42p64lz8x7evr",
@@ -112,15 +112,59 @@
         "tasks": {
           "todo": [
             {
+              "id": "mpvpqsr5va0fc0u6ice",
+              "title": "Make the urls 2 rows",
+              "description": "",
+              "createdAt": "2026-06-01T21:21:00.690Z"
+            },
+            {
+              "id": "mpvpsajey1hca50ks6",
+              "title": "Trash icons for delete",
+              "description": "",
+              "createdAt": "2026-06-01T21:22:10.394Z"
+            },
+            {
+              "id": "mpvpslckxuguhni3l1",
+              "title": "Outline icons for save and open",
+              "description": "",
+              "createdAt": "2026-06-01T21:22:24.404Z"
+            },
+            {
+              "id": "mpvpwfuaulirco91mr",
+              "title": "Figure out if that is shadow or border on the url cards and adjust",
+              "description": "",
+              "createdAt": "2026-06-01T21:25:23.890Z"
+            },
+            {
+              "id": "mpvpxmxqjqpqldgodd",
+              "title": "Make the shaded kanban background the color of the dots",
+              "description": "",
+              "createdAt": "2026-06-01T21:26:19.742Z"
+            }
+          ],
+          "inprogress": [],
+          "done": [
+            {
               "id": "mox6tn0wya0qrng4do",
               "title": "Switch from Bootstrap to Tailwind",
               "description": "",
               "createdAt": "2026-05-08T17:27:10.544Z"
+            },
+            {
+              "id": "mpvpytr18pmd1nymost",
+              "title": "Add DaistUI",
+              "description": "",
+              "createdAt": "2026-06-01T21:27:15.229Z"
             }
           ],
-          "inprogress": [],
-          "done": [],
-          "holding": []
+          "holding": [
+            {
+              "id": "mpvpyjdlpcaoj48j14d",
+              "title": "Look to have kanban shaded area map to \"primary, et al\" so it changes with themes.",
+              "description": "",
+              "createdAt": "2026-06-01T21:27:01.785Z"
+            }
+          ]
         },
         "urls": [
           {
