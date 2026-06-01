@@ -309,9 +309,12 @@
 
     <!-- Inline JavaScript -->
     <script>
-      // Use the file name as a unique key prefix for localStorage
-      const fileName = window.location.pathname.split("/").pop();
-      const STATE_KEY = `appState-${fileName}`;
+      // Use the full page path as a unique key prefix for localStorage and IndexedDB
+      // so each copy of the app (e.g. in different folders) gets its own isolated storage
+      const appStorageId = decodeURIComponent(window.location.pathname)
+        .replace(/^\/+/, "")
+        .replace(/[^a-zA-Z0-9_-]/g, "-");
+      const STATE_KEY = `appState-${appStorageId}`;
 
       // App state: multi-board support
       let appState = {
@@ -338,7 +341,7 @@
 
       // IndexedDB helpers for persisting file handle
       // Scoped per file so each copy of the app has its own stored handle
-      const FS_DB_NAME = `kanban-fs-${fileName}`;
+      const FS_DB_NAME = `kanban-fs-${appStorageId}`;
       const FS_DB_VERSION = 1;
       const FS_STORE_NAME = "handles";
 
@@ -525,8 +528,8 @@
             appState.boards = [createBoardTemplate("Default Board")];
           }
         } else {
-          const oldTasks = localStorage.getItem(`kanbanTasks-${fileName}`);
-          const oldUrls = localStorage.getItem(`urls-${fileName}`);
+          const oldTasks = localStorage.getItem(`kanbanTasks-${appStorageId}`);
+          const oldUrls = localStorage.getItem(`urls-${appStorageId}`);
           const board = createBoardTemplate("Default Board");
           if (oldTasks) {
             try { board.tasks = JSON.parse(oldTasks); } catch (e) {}
@@ -535,8 +538,8 @@
             try { board.urls = JSON.parse(oldUrls); } catch (e) {}
           }
           appState.boards = [board];
-          localStorage.removeItem(`kanbanTasks-${fileName}`);
-          localStorage.removeItem(`urls-${fileName}`);
+          localStorage.removeItem(`kanbanTasks-${appStorageId}`);
+          localStorage.removeItem(`urls-${appStorageId}`);
         }
         switchTab(appState.activeTabIndex || 0);
       }
