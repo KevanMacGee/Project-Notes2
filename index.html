@@ -149,17 +149,20 @@
         <div class="flex items-center gap-2 flex-wrap">
           <span id="saveIndicator" class="save-indicator"></span>
           <select id="themeSelect" class="select select-bordered select-sm w-36"></select>
-          <button class="btn btn-primary btn-sm" id="addTaskBtn">Add Task</button>
           <button class="btn btn-ghost btn-sm" id="exportDataBtn">Export</button>
           <button class="btn btn-ghost btn-sm" id="importDataBtn">Import</button>
           <input type="file" id="importFileInput" accept="application/json" class="hidden" />
-          <button class="btn btn-ghost btn-sm hidden" id="openFileBtn">📂 Open File</button>
-          <button class="btn btn-ghost btn-sm hidden" id="saveAsFileBtn">💾 Save As</button>
+          <button class="btn btn-sm hidden" id="openFileBtn">📂 Open File</button>
+          <button class="btn btn-sm hidden" id="saveAsFileBtn">💾 Save As</button>
         </div>
       </div>
 
       <!-- Board Tabs -->
       <div role="tablist" class="tabs tabs-lift board-tabs mb-4" id="boardTabs"></div>
+
+      <div class="mb-4">
+        <button class="btn btn-soft btn-primary btn-sm" id="addTaskBtn">Add Task</button>
+      </div>
 
       <!-- Kanban Columns -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -649,7 +652,7 @@
         });
         // Add "New Board" button
         const addBtn = document.createElement("button");
-        addBtn.className = "btn btn-sm btn-ghost ml-2";
+        addBtn.className = "btn btn-soft btn-primary btn-sm ml-2";
         addBtn.textContent = "+ New Board";
         addBtn.addEventListener("click", createNewBoard);
         tabContainer.appendChild(addBtn);
