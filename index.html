@@ -158,10 +158,9 @@
       </div>
 
       <!-- Board Tabs -->
-      <div role="tablist" class="tabs tabs-lift board-tabs mb-4" id="boardTabs"></div>
-
-      <div class="mb-4">
+      <div class="flex items-center gap-2 mb-4">
         <button class="btn btn-soft btn-primary btn-sm" id="addTaskBtn">Add Task</button>
+        <div role="tablist" class="tabs tabs-lift board-tabs" id="boardTabs"></div>
       </div>
 
       <!-- Kanban Columns -->
@@ -211,10 +210,8 @@
     <!-- URL Collection Section -->
     <div class="container mx-auto px-4 py-6 max-w-full">
       <div class="url-section mt-16 pt-8 border-t-2 border-base-300">
-        <div class="mb-6">
+        <div class="flex items-center gap-3 mb-6">
           <h2 class="text-2xl font-semibold m-0">URL Collection</h2>
-        </div>
-        <div class="mb-4">
           <button type="button" class="btn btn-soft btn-primary btn-sm" id="addUrlBtn">Add URL</button>
         </div>
         <div id="url-list" class="flex flex-col gap-2">
@@ -652,12 +649,16 @@
           });
           tabContainer.appendChild(btn);
         });
-        // Add "New Board" button
-        const addBtn = document.createElement("button");
-        addBtn.className = "btn btn-soft btn-primary btn-sm ml-2";
-        addBtn.textContent = "+ New Board";
-        addBtn.addEventListener("click", createNewBoard);
-        tabContainer.appendChild(addBtn);
+        // Add "New Board" button outside tabs container
+        const outer = tabContainer.parentElement;
+        let addBtn = outer.querySelector(".new-board-btn");
+        if (!addBtn) {
+          addBtn = document.createElement("button");
+          addBtn.className = "btn btn-soft btn-primary btn-sm ml-2 new-board-btn";
+          addBtn.textContent = "+ New Board";
+          addBtn.addEventListener("click", createNewBoard);
+          outer.appendChild(addBtn);
+        }
       }
 
       function renderUrlList() {
