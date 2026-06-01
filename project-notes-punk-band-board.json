@@ -20,24 +20,24 @@
               "createdAt": "2026-05-31T14:07:00.000Z"
             },
             {
-              "id": "punk_todo_contact_press",
-              "title": "Add contact and press kit area",
-              "description": "Include booking email, press email, downloadable logo/photo placeholders, and social links.",
-              "createdAt": "2026-05-31T14:09:00.000Z"
-            }
-          ],
-          "inprogress": [
-            {
               "id": "punk_progress_visual_direction",
               "title": "Lock in visual direction",
               "description": "Gritty but readable: black/cream base, red accent, photocopied flyer textures, chunky headings, and clean body text.",
               "createdAt": "2026-05-31T14:11:00.000Z"
-            },
+            }
+          ],
+          "inprogress": [
             {
               "id": "punk_progress_assets",
               "title": "Collect band assets",
               "description": "Need logo, 3 live photos, album art, short bio, social handles, and current show list.",
               "createdAt": "2026-05-31T14:12:00.000Z"
+            },
+            {
+              "id": "punk_done_placeholder_name",
+              "title": "Choose placeholder band identity",
+              "description": "Working name: The Static Rackets. Tone: loud, fast, scrappy, slightly funny, not too polished.",
+              "createdAt": "2026-05-31T14:14:00.000Z"
             }
           ],
           "done": [
@@ -48,16 +48,16 @@
               "createdAt": "2026-05-31T14:13:00.000Z"
             },
             {
-              "id": "punk_done_placeholder_name",
-              "title": "Choose placeholder band identity",
-              "description": "Working name: The Static Rackets. Tone: loud, fast, scrappy, slightly funny, not too polished.",
-              "createdAt": "2026-05-31T14:14:00.000Z"
-            },
-            {
               "id": "punk_todo_merch_grid",
               "title": "Create merch preview grid",
               "description": "Show 3–6 items: shirt, hoodie, vinyl, sticker pack. Each card needs image, price, and external shop link.",
               "createdAt": "2026-05-31T14:08:00.000Z"
+            },
+            {
+              "id": "punk_todo_contact_press",
+              "title": "Add contact and press kit area",
+              "description": "Include booking email, press email, downloadable logo/photo placeholders, and social links.",
+              "createdAt": "2026-05-31T14:09:00.000Z"
             }
           ],
           "holding": [
@@ -91,10 +91,6 @@
           {
             "url": "https://www.eventbrite.com",
             "description": "Possible ticketing platform reference"
-          },
-          {
-            "url": "https://linktr.ee",
-            "description": "Simple all-links landing page reference"
           },
           {
             "url": "https://lucide.dev/icons",

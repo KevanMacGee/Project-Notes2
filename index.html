@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <title>Kanban Board</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <!-- Tailwind CSS + daisyUI -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
@@ -12,6 +15,10 @@
 
     <!-- Inline CSS -->
     <style>
+      body {
+        font-family: 'Raleway', sans-serif;
+      }
+
       .column-header {
         display: flex;
         align-items: center;
@@ -152,7 +159,7 @@
       </div>
 
       <!-- Board Tabs -->
-      <div role="tablist" class="tabs tabs-border board-tabs mb-4" id="boardTabs"></div>
+      <div role="tablist" class="tabs tabs-lift board-tabs mb-4" id="boardTabs"></div>
 
       <!-- Kanban Columns -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
