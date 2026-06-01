@@ -330,7 +330,8 @@
       let saveTimeout = null;
 
       // IndexedDB helpers for persisting file handle
-      const FS_DB_NAME = "kanban-fs";
+      // Scoped per file so each copy of the app has its own stored handle
+      const FS_DB_NAME = `kanban-fs-${fileName}`;
       const FS_DB_VERSION = 1;
       const FS_STORE_NAME = "handles";
 
