@@ -112,28 +112,16 @@
         "tasks": {
           "todo": [
             {
-              "id": "mpvpqsr5va0fc0u6ice",
-              "title": "Make the urls 2 rows",
-              "description": "",
-              "createdAt": "2026-06-01T21:21:00.690Z"
-            },
-            {
-              "id": "mpvpsajey1hca50ks6",
-              "title": "Trash icons for delete",
-              "description": "",
-              "createdAt": "2026-06-01T21:22:10.394Z"
-            },
-            {
-              "id": "mpvpslckxuguhni3l1",
-              "title": "Outline icons for save and open",
-              "description": "",
-              "createdAt": "2026-06-01T21:22:24.404Z"
-            },
-            {
               "id": "mpvpxmxqjqpqldgodd",
               "title": "Make the shaded kanban background the color of the dots",
               "description": "",
               "createdAt": "2026-06-01T21:26:19.742Z"
+            },
+            {
+              "id": "mpws00xhurjzqbz4wad",
+              "title": "Make the dot colors map to theme colors",
+              "description": "",
+              "createdAt": "2026-06-02T15:11:56.597Z"
             }
           ],
           "inprogress": [],
@@ -155,6 +143,24 @@
               "title": "Figure out if that is shadow or border on the url cards and adjust",
               "description": "",
               "createdAt": "2026-06-01T21:25:23.890Z"
+            },
+            {
+              "id": "mpvpsajey1hca50ks6",
+              "title": "Trash icons for delete",
+              "description": "",
+              "createdAt": "2026-06-01T21:22:10.394Z"
+            },
+            {
+              "id": "mpvpslckxuguhni3l1",
+              "title": "Outline icons for save and open",
+              "description": "",
+              "createdAt": "2026-06-01T21:22:24.404Z"
+            },
+            {
+              "id": "mpvpqsr5va0fc0u6ice",
+              "title": "Make the urls 2 rows",
+              "description": "",
+              "createdAt": "2026-06-01T21:21:00.690Z"
             }
           ],
           "holding": [
@@ -167,6 +173,14 @@
           ]
         },
         "urls": [
+          {
+            "url": "https://v3.tailwindcss.com/docs/box-shadow",
+            "description": ""
+          },
+          {
+            "url": "https://daisyui.com/docs/colors/",
+            "description": ""
+          },
           {
             "url": "https://shadcnstudio.com/theme-generator",
             "description": ""
@@ -181,6 +195,10 @@
           },
           {
             "url": "https://ui.shadcn.com/",
+            "description": ""
+          },
+          {
+            "url": "https://tailscan.com/tailwind/effects/box-shadow-class",
             "description": ""
           }
         ]

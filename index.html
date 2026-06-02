@@ -89,12 +89,19 @@
       }
 
       .url-item {
-        transition: all 0.3s ease;
-        border-left: 4px solid oklch(var(--in));
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        border: 1px solid color-mix(in oklch, var(--color-base-content) 14%, transparent);
+        border-left: 4px solid var(--color-info);
       }
 
       .url-item:hover {
-        transform: translateX(5px);
+        transform: translateY(-2px);
+        border-color: color-mix(in oklch, var(--color-base-content) 22%, transparent);
+      }
+
+      .url-item.drag-over {
+        border-color: var(--color-info);
+        box-shadow: 0 0 0 2px color-mix(in oklch, var(--color-info) 18%, transparent);
       }
 
       .url-title {
@@ -224,7 +231,7 @@
           <h2 class="text-2xl font-semibold m-0">URL Collection</h2>
           <button type="button" class="btn btn-soft btn-primary btn-sm" id="addUrlBtn">Add URL</button>
         </div>
-        <div id="url-list" class="flex flex-col gap-2">
+        <div id="url-list" class="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div id="empty-state" class="text-center py-12 opacity-60">
             <h4 class="text-lg font-medium">No URLs added yet</h4>
             <p class="text-sm mt-1">Click the "Add URL" button to get started</p>
@@ -1115,6 +1122,13 @@
         initStorage();
         initUrlCollector();
         saveTaskBtn.addEventListener("click", handleSaveTask);
+
+        // Pressing Enter in the Title field submits the form; save instead of
+        // letting the browser reload the page (which would lose the input).
+        taskForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          handleSaveTask();
+        });
 
         // Add Task button
         document.getElementById("addTaskBtn").addEventListener("click", () => {
