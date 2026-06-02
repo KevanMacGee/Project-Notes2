@@ -702,17 +702,29 @@
 
           const displayUrl = url.replace(/^https?:\/\//, "");
 
+          // Build structure with static markup, then inject user-controlled
+          // values via DOM APIs so any HTML in stored data renders as text.
           urlItem.innerHTML = `
             <div class="card-body p-3 flex-row justify-between items-start gap-2">
               <div class="min-w-0">
                 <h5 class="url-title font-medium text-sm">
-                  <a href="${url}" target="_blank" rel="noopener noreferrer" class="link link-primary">${displayUrl}</a>
+                  <a target="_blank" rel="noopener noreferrer" class="link link-primary"></a>
                 </h5>
-                ${description ? `<p class="text-xs text-base-content/60 mt-0.5">${description}</p>` : ""}
               </div>
               <button class="delete-url btn btn-ghost btn-xs text-error shrink-0"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
             </div>
           `;
+
+          const linkEl = urlItem.querySelector("a");
+          linkEl.href = url;
+          linkEl.textContent = displayUrl;
+
+          if (description) {
+            const descEl = document.createElement("p");
+            descEl.className = "text-xs text-base-content/60 mt-0.5";
+            descEl.textContent = description;
+            linkEl.closest(".min-w-0").appendChild(descEl);
+          }
 
           // Delete handler
           urlItem.querySelector(".delete-url").addEventListener("click", () => {
@@ -985,49 +997,45 @@
         const saveUrlBtn = document.getElementById("save-url-btn");
         const urlValidation = document.getElementById("url-validation");
 
-        function isValidUrl(urlString) {
-          if (/^file:\/\//i.test(urlString)) {
-            try {
-              new URL(urlString);
-              return true;
-            } catch (err) {
-              return false;
-            }
+        const ALLOWED_URL_SCHEMES = ["http:", "https:", "file:"];
+
+        // Normalize user input into the URL we intend to store and decide if
+        // it's acceptable. Returns { url } on success or { error } on failure.
+        function parseUrlInput(rawInput) {
+          const trimmed = rawInput.trim();
+          if (!trimmed) {
+            return { error: "Please enter a URL." };
           }
 
-          if (!/^(?:[a-z]+:)?\/\//i.test(urlString)) {
-            urlString = "https://" + urlString;
-          }
+          // Prepend https:// only when there's no scheme at all, so things like
+          // ports, paths, query strings and IPs are left untouched.
+          const hasScheme = /^[a-z][a-z0-9+.-]*:/i.test(trimmed);
+          const candidate = hasScheme ? trimmed : "https://" + trimmed;
 
-          const urlPattern = /^(https?:\/\/)?(www\.)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/.*)?$/;
-
-          if (!urlPattern.test(urlString)) {
-            return false;
-          }
-
+          let parsed;
           try {
-            new URL(urlString);
-            return true;
+            parsed = new URL(candidate);
           } catch (err) {
-            return false;
+            return { error: "That doesn't look like a valid URL." };
           }
+
+          if (!ALLOWED_URL_SCHEMES.includes(parsed.protocol)) {
+            return { error: "Only http, https, and file links are allowed." };
+          }
+
+          return { url: parsed.href };
         }
 
         function handleSaveUrl() {
-          let url = urlInput.value.trim();
-          const description = descriptionInput.value.trim();
-
-          if (!/^(?:[a-z]+:)?\/\//i.test(url)) {
-            url = "https://" + url;
-          }
-
-          if (!isValidUrl(url)) {
-            urlValidation.textContent = "Please enter a valid URL.";
+          const result = parseUrlInput(urlInput.value);
+          if (result.error) {
+            urlValidation.textContent = result.error;
             return;
           }
 
+          const description = descriptionInput.value.trim();
           urlValidation.textContent = "";
-          addUrlToList(url, description);
+          addUrlToList(result.url, description);
           urlForm.reset();
           document.getElementById("addUrlModal").close();
         }
