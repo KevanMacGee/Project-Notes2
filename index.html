@@ -1013,7 +1013,7 @@
           }
         }
 
-        saveUrlBtn.addEventListener("click", function () {
+        function handleSaveUrl() {
           let url = urlInput.value.trim();
           const description = descriptionInput.value.trim();
 
@@ -1030,6 +1030,15 @@
           addUrlToList(url, description);
           urlForm.reset();
           document.getElementById("addUrlModal").close();
+        }
+
+        saveUrlBtn.addEventListener("click", handleSaveUrl);
+
+        // Pressing Enter in the URL field submits the form; save instead of
+        // letting the browser reload the page (which would lose the input).
+        urlForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          handleSaveUrl();
         });
       }
 
