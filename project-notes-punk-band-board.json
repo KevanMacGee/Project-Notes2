@@ -130,26 +130,13 @@
               "createdAt": "2026-06-01T21:22:24.404Z"
             },
             {
-              "id": "mpvpwfuaulirco91mr",
-              "title": "Figure out if that is shadow or border on the url cards and adjust",
-              "description": "",
-              "createdAt": "2026-06-01T21:25:23.890Z"
-            },
-            {
               "id": "mpvpxmxqjqpqldgodd",
               "title": "Make the shaded kanban background the color of the dots",
               "description": "",
               "createdAt": "2026-06-01T21:26:19.742Z"
             }
           ],
-          "inprogress": [
-            {
-              "id": "mpvpyjdlpcaoj48j14d",
-              "title": "Look to have kanban shaded area map to Daisy color values so it changes with themes.",
-              "description": "It's now changed but the shadows are still slight and look a bit weird on dark themes. Need to investigate if the colors aren't right yet or the shadow geometry needs to be adjusted.",
-              "createdAt": "2026-06-01T21:27:01.785Z"
-            }
-          ],
+          "inprogress": [],
           "done": [
             {
               "id": "mox6tn0wya0qrng4do",
@@ -162,9 +149,22 @@
               "title": "Add DaistUI",
               "description": "",
               "createdAt": "2026-06-01T21:27:15.229Z"
+            },
+            {
+              "id": "mpvpwfuaulirco91mr",
+              "title": "Figure out if that is shadow or border on the url cards and adjust",
+              "description": "",
+              "createdAt": "2026-06-01T21:25:23.890Z"
             }
           ],
-          "holding": []
+          "holding": [
+            {
+              "id": "mpvpyjdlpcaoj48j14d",
+              "title": "Look to have kanban shaded area map to Daisy color values so it changes with themes.",
+              "description": "UPDATE: Changed the shadow to shadow-md from shadow-sm. The issue is I am not crazy about the stock tailwind shadow. So leave it as is or tweak a custom shadow.\n*************\nIt's now changed but the shadows are still slight and look a bit weird on dark themes. Need to investigate if the colors aren't right yet or the shadow geometry needs to be adjusted.",
+              "createdAt": "2026-06-01T21:27:01.785Z"
+            }
+          ]
         },
         "urls": [
           {
