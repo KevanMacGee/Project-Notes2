@@ -13,6 +13,9 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+    <!-- Lucide Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+
     <!-- Inline CSS -->
     <style>
       body {
@@ -135,8 +138,7 @@
         cursor: pointer;
       }
 
-      .board-tabs .tab:hover .close-board,
-      .board-tabs .tab.tab-active .close-board {
+      .board-tabs .tab:hover .close-board {
         opacity: 0.6;
       }
 
@@ -160,8 +162,8 @@
           <button class="btn btn-ghost btn-sm" id="exportDataBtn">Export</button>
           <button class="btn btn-ghost btn-sm" id="importDataBtn">Import</button>
           <input type="file" id="importFileInput" accept="application/json" class="hidden" />
-          <button class="btn btn-sm hidden" id="openFileBtn">📂 Open File</button>
-          <button class="btn btn-sm hidden" id="saveAsFileBtn">💾 Save As</button>
+          <button class="btn btn-sm hidden" id="openFileBtn"><i data-lucide="folder-open" class="w-4 h-4"></i> Open File</button>
+          <button class="btn btn-sm hidden" id="saveAsFileBtn"><i data-lucide="save" class="w-4 h-4"></i> Save As</button>
         </div>
       </div>
 
@@ -643,7 +645,7 @@
           const btn = document.createElement("button");
           btn.role = "tab";
           btn.className = "tab" + (idx === appState.activeTabIndex ? " tab-active" : "");
-          btn.innerHTML = board.name + '<span class="close-board" title="Delete board">✕</span>';
+          btn.innerHTML = board.name + '<span class="close-board" title="Delete board"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></span>';
           btn.addEventListener("click", (e) => {
             if (e.target.classList.contains("close-board")) {
               deleteBoard(idx);
@@ -667,6 +669,7 @@
           addBtn.addEventListener("click", createNewBoard);
           outer.appendChild(addBtn);
         }
+        lucide.createIcons();
       }
 
       function renderUrlList() {
@@ -700,7 +703,7 @@
                 </h5>
                 ${description ? `<p class="text-xs text-base-content/60 mt-0.5">${description}</p>` : ""}
               </div>
-              <button class="delete-url btn btn-ghost btn-xs text-error shrink-0">✕</button>
+              <button class="delete-url btn btn-ghost btn-xs text-error shrink-0"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
             </div>
           `;
 
@@ -740,6 +743,7 @@
 
           urlList.appendChild(urlItem);
         });
+        lucide.createIcons();
       }
 
       // Generate a unique ID for tasks
@@ -763,6 +767,7 @@
         });
 
         updateTaskCounts();
+        lucide.createIcons();
       }
 
       // Create a task card element
@@ -777,7 +782,7 @@
           <div class="card-body p-3">
             <div class="flex justify-between items-start gap-2">
               <h5 class="card-title text-sm font-medium">${task.title}</h5>
-              <button class="delete-task btn btn-ghost btn-xs text-error shrink-0" data-id="${task.id}" data-column="${column}">✕</button>
+              <button class="delete-task btn btn-ghost btn-xs text-error shrink-0" data-id="${task.id}" data-column="${column}"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
             </div>
             <p class="text-xs text-base-content/60">${task.description || ""}</p>
           </div>
@@ -1105,6 +1110,7 @@
 
       // Event Listeners
       document.addEventListener("DOMContentLoaded", () => {
+        lucide.createIcons();
         initTheme();
         initStorage();
         initUrlCollector();
