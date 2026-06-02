@@ -37,20 +37,20 @@
         margin-right: 8px;
       }
 
-      .not-started {
-        background-color: #95a5a6;
+      .status-indicator.not-started {
+        background-color: var(--color-neutral-content);
       }
 
-      .in-progress {
-        background-color: #18bc9c;
+      .status-indicator.in-progress {
+        background-color: var(--color-success);
       }
 
-      .done {
-        background-color: #3498db;
+      .status-indicator.done {
+        background-color: var(--color-info);
       }
 
-      .holding {
-        background-color: #f39c12;
+      .status-indicator.holding {
+        background-color: var(--color-warning);
       }
 
       .kanban-column {
@@ -58,6 +58,22 @@
         padding-bottom: 20px;
         border-radius: 8px;
         transition: background-color 0.2s ease;
+      }
+
+      .kanban-column.not-started-column {
+        background-color: color-mix(in oklch, var(--color-neutral-content) 12%, transparent);
+      }
+
+      .kanban-column.in-progress-column {
+        background-color: color-mix(in oklch, var(--color-success) 12%, transparent);
+      }
+
+      .kanban-column.done-column {
+        background-color: color-mix(in oklch, var(--color-info) 12%, transparent);
+      }
+
+      .kanban-column.holding-column {
+        background-color: color-mix(in oklch, var(--color-warning) 12%, transparent);
       }
 
       .task-card {
@@ -189,7 +205,7 @@
             <span class="font-medium">Not started</span>
             <span class="task-count ml-2 opacity-60">0</span>
           </div>
-          <div class="kanban-column bg-base-200/50 p-2" id="todo" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+          <div class="kanban-column not-started-column p-2" id="todo" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
         </div>
 
         <!-- In Progress Column -->
@@ -199,7 +215,7 @@
             <span class="font-medium">In progress</span>
             <span class="task-count ml-2 opacity-60">0</span>
           </div>
-          <div class="kanban-column bg-base-200/50 p-2" id="inprogress" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+          <div class="kanban-column in-progress-column p-2" id="inprogress" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
         </div>
 
         <!-- Done Column -->
@@ -209,7 +225,7 @@
             <span class="font-medium">Done</span>
             <span class="task-count ml-2 opacity-60">0</span>
           </div>
-          <div class="kanban-column bg-base-200/50 p-2" id="done" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+          <div class="kanban-column done-column p-2" id="done" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
         </div>
 
         <!-- Holding Area Column -->
@@ -219,7 +235,7 @@
             <span class="font-medium">Holding Area</span>
             <span class="task-count ml-2 opacity-60">0</span>
           </div>
-          <div class="kanban-column bg-base-200/50 p-2" id="holding" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+          <div class="kanban-column holding-column p-2" id="holding" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
         </div>
       </div>
     </div>

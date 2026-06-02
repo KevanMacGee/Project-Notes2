@@ -110,21 +110,21 @@
         "id": "mow9qzaynr7dlyqu6ha",
         "name": "Project Notes",
         "tasks": {
-          "todo": [
-            {
-              "id": "mpvpxmxqjqpqldgodd",
-              "title": "Make the shaded kanban background the color of the dots",
-              "description": "",
-              "createdAt": "2026-06-01T21:26:19.742Z"
-            },
+          "todo": [],
+          "inprogress": [
             {
               "id": "mpws00xhurjzqbz4wad",
               "title": "Make the dot colors map to theme colors",
               "description": "",
               "createdAt": "2026-06-02T15:11:56.597Z"
+            },
+            {
+              "id": "mpvpxmxqjqpqldgodd",
+              "title": "Make the shaded kanban background the color of the dots",
+              "description": "",
+              "createdAt": "2026-06-01T21:26:19.742Z"
             }
           ],
-          "inprogress": [],
           "done": [
             {
               "id": "mox6tn0wya0qrng4do",
