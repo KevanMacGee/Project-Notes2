@@ -142,7 +142,14 @@
               "createdAt": "2026-06-01T21:26:19.742Z"
             }
           ],
-          "inprogress": [],
+          "inprogress": [
+            {
+              "id": "mpvpyjdlpcaoj48j14d",
+              "title": "Look to have kanban shaded area map to Daisy color values so it changes with themes.",
+              "description": "It's now changed but the shadows are still slight and look a bit weird on dark themes. Need to investigate if the colors aren't right yet or the shadow geometry needs to be adjusted.",
+              "createdAt": "2026-06-01T21:27:01.785Z"
+            }
+          ],
           "done": [
             {
               "id": "mox6tn0wya0qrng4do",
@@ -157,14 +164,7 @@
               "createdAt": "2026-06-01T21:27:15.229Z"
             }
           ],
-          "holding": [
-            {
-              "id": "mpvpyjdlpcaoj48j14d",
-              "title": "Look to have kanban shaded area map to \"primary, et al\" so it changes with themes.",
-              "description": "",
-              "createdAt": "2026-06-01T21:27:01.785Z"
-            }
-          ]
+          "holding": []
         },
         "urls": [
           {

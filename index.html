@@ -62,6 +62,10 @@
         transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
       }
 
+      .theme-shadow {
+        --tw-shadow-color: color-mix(in oklch, var(--color-base-content) 18%, transparent);
+      }
+
       .task-card:hover {
         transform: scale(1.02);
       }
@@ -678,7 +682,7 @@
 
         urls.forEach(({ url, description }, idx) => {
           const urlItem = document.createElement("div");
-          urlItem.className = "url-item card bg-base-100 shadow-sm cursor-grab";
+          urlItem.className = "url-item card bg-base-100 shadow-sm theme-shadow cursor-grab";
           urlItem.setAttribute("draggable", "true");
           urlItem.setAttribute("data-index", idx);
 
@@ -760,7 +764,7 @@
       // Create a task card element
       function createTaskCard(task, column) {
         const taskCard = document.createElement("div");
-        taskCard.className = "task-card card bg-base-100 shadow-sm border border-base-300 mb-2.5";
+        taskCard.className = "task-card card bg-base-100 shadow-sm theme-shadow border border-base-300 mb-2.5";
         taskCard.draggable = true;
         taskCard.dataset.id = task.id;
         taskCard.dataset.column = column;
