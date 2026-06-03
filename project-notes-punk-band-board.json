@@ -1,6 +1,6 @@
 {
   "appState": {
-    "activeTabIndex": 0,
+    "activeTabIndex": 3,
     "boards": [
       {
         "id": "mow9pm42p64lz8x7evr",
@@ -229,6 +229,17 @@
               "createdAt": "2026-05-29T07:00:17.979Z"
             }
           ],
+          "holding": []
+        },
+        "urls": []
+      },
+      {
+        "id": "mpymv0ugqysnbcfd3wa",
+        "name": "New Board",
+        "tasks": {
+          "todo": [],
+          "inprogress": [],
+          "done": [],
           "holding": []
         },
         "urls": []

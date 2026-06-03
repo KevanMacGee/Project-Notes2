@@ -653,7 +653,7 @@
           btn.className = "tab" + (idx === appState.activeTabIndex ? " tab-active" : "");
           btn.innerHTML = board.name + '<span class="close-board" title="Delete board"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></span>';
           btn.addEventListener("click", (e) => {
-            if (e.target.classList.contains("close-board")) {
+            if (e.target.closest(".close-board")) {
               deleteBoard(idx);
             } else {
               switchTab(idx);
