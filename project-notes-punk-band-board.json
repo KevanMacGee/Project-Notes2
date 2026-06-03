@@ -1,6 +1,6 @@
 {
   "appState": {
-    "activeTabIndex": 3,
+    "activeTabIndex": 1,
     "boards": [
       {
         "id": "mow9pm42p64lz8x7evr",
@@ -139,12 +139,6 @@
               "createdAt": "2026-06-01T21:27:15.229Z"
             },
             {
-              "id": "mpvpwfuaulirco91mr",
-              "title": "Figure out if that is shadow or border on the url cards and adjust",
-              "description": "",
-              "createdAt": "2026-06-01T21:25:23.890Z"
-            },
-            {
               "id": "mpvpsajey1hca50ks6",
               "title": "Trash icons for delete",
               "description": "",
@@ -161,6 +155,12 @@
               "title": "Make the urls 2 rows",
               "description": "",
               "createdAt": "2026-06-01T21:21:00.690Z"
+            },
+            {
+              "id": "mpvpwfuaulirco91mr",
+              "title": "Figure out if that is shadow or border on the url cards and adjust",
+              "description": "",
+              "createdAt": "2026-06-01T21:25:23.890Z"
             },
             {
               "id": "mpws00xhurjzqbz4wad",
@@ -208,16 +208,16 @@
         "tasks": {
           "todo": [
             {
-              "id": "mpqjulws9g6hzl7adz5",
-              "title": "Tags don't autofill in creation step",
-              "description": "If you have already added a template and go into the edit screen, you can add more tags. If you start to type on that had already been used, it appears in the dropdown. This does not happen though on the initial step when you are creating the board to begin with. It should,",
-              "createdAt": "2026-05-29T06:37:09.868Z"
-            },
-            {
               "id": "mpqkr7wuhtvnzkpvsts",
               "title": "Image display is messy and alphabetical.",
               "description": "There should be a way to designate which image(s) show first.",
               "createdAt": "2026-05-29T07:02:31.374Z"
+            },
+            {
+              "id": "mpqjulws9g6hzl7adz5",
+              "title": "Tags don't autofill in creation step",
+              "description": "If you have already added a template and go into the edit screen, you can add more tags. If you start to type on that had already been used, it appears in the dropdown. This does not happen though on the initial step when you are creating the board to begin with. It should,",
+              "createdAt": "2026-05-29T06:37:09.868Z"
             }
           ],
           "inprogress": [],
@@ -229,17 +229,6 @@
               "createdAt": "2026-05-29T07:00:17.979Z"
             }
           ],
-          "holding": []
-        },
-        "urls": []
-      },
-      {
-        "id": "mpymv0ugqysnbcfd3wa",
-        "name": "New Board",
-        "tasks": {
-          "todo": [],
-          "inprogress": [],
-          "done": [],
           "holding": []
         },
         "urls": []
