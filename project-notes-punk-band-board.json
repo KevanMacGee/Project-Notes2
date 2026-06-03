@@ -1,6 +1,6 @@
 {
   "appState": {
-    "activeTabIndex": 1,
+    "activeTabIndex": 0,
     "boards": [
       {
         "id": "mow9pm42p64lz8x7evr",
@@ -113,16 +113,16 @@
           "todo": [],
           "inprogress": [
             {
-              "id": "mpws00xhurjzqbz4wad",
-              "title": "Make the dot colors map to theme colors",
-              "description": "",
-              "createdAt": "2026-06-02T15:11:56.597Z"
-            },
-            {
               "id": "mpvpxmxqjqpqldgodd",
               "title": "Make the shaded kanban background the color of the dots",
               "description": "",
               "createdAt": "2026-06-01T21:26:19.742Z"
+            },
+            {
+              "id": "mpvpyjdlpcaoj48j14d",
+              "title": "Look to have kanban shaded area map to Daisy color values so it changes with themes.",
+              "description": "UPDATE: Changed the shadow to shadow-md from shadow-sm. The issue is I am not crazy about the stock tailwind shadow. So leave it as is or tweak a custom shadow.\n*************\nIt's now changed but the shadows are still slight and look a bit weird on dark themes. Need to investigate if the colors aren't right yet or the shadow geometry needs to be adjusted.",
+              "createdAt": "2026-06-01T21:27:01.785Z"
             }
           ],
           "done": [
@@ -161,16 +161,15 @@
               "title": "Make the urls 2 rows",
               "description": "",
               "createdAt": "2026-06-01T21:21:00.690Z"
+            },
+            {
+              "id": "mpws00xhurjzqbz4wad",
+              "title": "Make the dot colors map to theme colors",
+              "description": "",
+              "createdAt": "2026-06-02T15:11:56.597Z"
             }
           ],
-          "holding": [
-            {
-              "id": "mpvpyjdlpcaoj48j14d",
-              "title": "Look to have kanban shaded area map to Daisy color values so it changes with themes.",
-              "description": "UPDATE: Changed the shadow to shadow-md from shadow-sm. The issue is I am not crazy about the stock tailwind shadow. So leave it as is or tweak a custom shadow.\n*************\nIt's now changed but the shadows are still slight and look a bit weird on dark themes. Need to investigate if the colors aren't right yet or the shadow geometry needs to be adjusted.",
-              "createdAt": "2026-06-01T21:27:01.785Z"
-            }
-          ]
+          "holding": []
         },
         "urls": [
           {
