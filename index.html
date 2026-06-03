@@ -652,16 +652,14 @@
           btn.role = "tab";
           btn.className = "tab" + (idx === appState.activeTabIndex ? " tab-active" : "");
           btn.innerHTML = board.name + '<span class="close-board" title="Delete board"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></span>';
-          btn.addEventListener("click", (e) => {
-            if (e.target.closest(".close-board")) {
-              deleteBoard(idx);
-            } else {
-              switchTab(idx);
-            }
-          });
+          btn.addEventListener("click", () => switchTab(idx));
           btn.addEventListener("dblclick", (e) => {
             e.preventDefault();
             renameBoard(idx);
+          });
+          btn.querySelector(".close-board").addEventListener("click", (e) => {
+            e.stopPropagation();
+            deleteBoard(idx);
           });
           tabContainer.appendChild(btn);
         });
@@ -812,7 +810,7 @@
 
         // Add click handler for editing
         taskCard.addEventListener("click", (event) => {
-          if (!event.target.classList.contains("delete-task") && !event.target.closest(".delete-task")) {
+          if (!event.target.closest(".delete-task")) {
             openEditModal(task, column);
           }
         });
@@ -920,8 +918,7 @@
 
       function handleDeleteTask(event) {
         event.stopPropagation();
-        const btn = event.target.closest(".delete-task");
-        if (!btn) return;
+        const btn = event.currentTarget;
         const id = btn.dataset.id;
         const column = btn.dataset.column;
 
